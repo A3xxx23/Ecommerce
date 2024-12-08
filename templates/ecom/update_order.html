@@ -1,0 +1,43 @@
+{% extends 'ecom/admin_base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+{% load static %}
+
+<head>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/faviconImg.png' %}">
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <meta name="description"
+    content="Shop the latest fashion trends at Fashion Hub. Discover stylish clothing for men, women, and kids with free shipping on orders over $50.">
+  <meta name="keywords"
+    content="clothing, fashion, online store, e-commerce, men's clothing, women's clothing, kids' clothing, accessories, trendy outfits, affordable fashion">
+  <meta name="author" content="Angel Aquino">
+  <meta name="robots" content="index, follow">
+</head>
+<br><br><br><br><br><br>
+
+<form method="post">
+  {% csrf_token %}
+  <div class="container register-form">
+    <div class="form">
+      <div class="note">
+        <p>Update Status Of Order</p>
+      </div>
+      <div class="form-content">
+
+            <label for="">Select Any:</label>
+
+              {% render_field orderForm.status class="form-control" placeholder="Address" %}
+            </div>
+
+          </div>
+        </div>
+        <button type="submit" class="btnSubmit">Update Order Status</button>
+
+</form>
+
+
+{% endblock content %}

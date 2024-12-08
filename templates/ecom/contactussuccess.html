@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description"
+    content="Shop the latest fashion trends at Fashion Hub. Discover stylish clothing for men, women, and kids with free shipping on orders over $50.">
+  <meta name="keywords"
+    content="clothing, fashion, online store, e-commerce, men's clothing, women's clothing, kids' clothing, accessories, trendy outfits, affordable fashion">
+  <meta name="author" content="Angel Aquino">
+  <meta name="robots" content="index, follow">
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="{% static 'images/faviconImg.png' %}">
+
+
+  <title>Kluster</title>
+  <style media="screen">
+    .jumbotron {
+      margin-bottom: 0px;
+    }
+
+    .jumbotron h1 {
+      text-align: center;
+    }
+  </style>
+
+</head>
+
+<body style="background-color: #f6f6f7;">
+
+  {% include "ecom/navbar.html" %}
+  <br><br>
+  <div class="jumbotron">
+    <h1 class="display-4">Your message sent successfully !</h1>
+    <p class="lead">We will respond to your feedback soon</p>
+    <hr class="my-4">
+    <p>Check other features of website !</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="/" role="button">HOME</a>
+    </p>
+  </div>
+
+  {% include "ecom/footer.html" %}
+</body>
+
+</html>

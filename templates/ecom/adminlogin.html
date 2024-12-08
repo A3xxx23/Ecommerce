@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Kluster</title>
+    <meta name="description"
+    content="Shop the latest fashion trends at Fashion Hub. Discover stylish clothing for men, women, and kids with free shipping on orders over $50.">
+  <meta name="keywords"
+    content="clothing, fashion, online store, e-commerce, men's clothing, women's clothing, kids' clothing, accessories, trendy outfits, affordable fashion">
+  <meta name="author" content="Angel Aquino">
+  <meta name="robots" content="index, follow">
+    <!-- Favicons -->
+   <link rel="icon" type="image/x-icon" href="{% static 'images/faviconImg.png' %}">
+    <style media="screen">
+
+:root {
+  --text-color: #120E16;
+  --second-color: #613FE5;
+  --color-body: #F6F6F7;
+  --header-color: #B5B5B5;
+}
+
+      .admin {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #bdc3c7;  
+    background: -webkit-linear-gradient(to left, #2C5364, #c7dae0, #3498db);  
+    background: linear-gradient(to left, #613FE5, #613FE5, #613FE5); 
+
+}
+
+.box {
+    width: 100%;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--text-color);
+    border-radius: 50px;
+    text-align: center;
+    transition: 0.25s;
+    margin-top: 100px;
+}
+
+.box input[type="text"],
+.box input[type="password"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid var(--second-color);
+    padding: 10px 10px;
+    width: 250px;
+    outline: none;
+    color: var(--color-body);
+    border-radius: 24px;
+    transition: 0.25s
+}
+
+.box h1 {
+    color: var(--color-body);
+    font-weight: 500
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+    width: 300px;
+    border-color: var(--second-color)
+}
+
+.box input[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid var(--second-color);
+    padding: 14px 40px;
+    outline: none;
+    color: var(--color-body);
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer
+}
+
+.box input[type="submit"]:hover {
+    background: var(--second-color)
+}
+
+
+    </style>
+  </head>
+  <body class="admin">
+    {% include "ecom/navbar.html" %}
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <form class="box" method="post">
+                    {% csrf_token %}
+                    <h1>Admin Login</h1>
+                   
+                     {% render_field form.username class="form-control" placeholder="Username" autocomplete="off" %}
+                     {% render_field form.password class="form-control" placeholder="Password" %}
+
+                     <input type="submit" name="" value="Login">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br>
+{% include "ecom/footerhome.html" %}
+  </body>
+</html>

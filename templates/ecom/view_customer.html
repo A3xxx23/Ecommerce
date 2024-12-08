@@ -1,0 +1,50 @@
+{% extends 'ecom/admin_base.html' %}
+{% load static %}
+{% block content %}
+
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/faviconImg.png' %}">
+  <meta name="description"
+    content="Shop the latest fashion trends at Fashion Hub. Discover stylish clothing for men, women, and kids with free shipping on orders over $50.">
+  <meta name="keywords"
+    content="clothing, fashion, online store, e-commerce, men's clothing, women's clothing, kids' clothing, accessories, trendy outfits, affordable fashion">
+  <meta name="author" content="Angel Aquino">
+  <meta name="robots" content="index, follow">
+</head>
+
+<div class="container">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h6 class="panel-title">Total Customers</h6>
+    </div>
+    <table class="table table-hover table-bordered" id="dev-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Picture</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      {% for c in customers %}
+      <tr>
+        <td> {{c.get_name}}</td>
+        <td> <img src="{% static 'profile_pic/CustomerProfilePic/img.jpg' %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{c.mobile}}</td>
+        <td>{{c.address}}</td>
+        <td><a class="btn btn-primary btn-xs" href="{% url 'update-customer' c.id  %}"><span class="glyphicon glyphicon-edit"></span></a>
+        <a class="btn btn-danger btn-xs" href="{% url 'delete-customer' c.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+{% endblock content %}

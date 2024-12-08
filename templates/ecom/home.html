@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kluster</title>
+  <link rel="icon" type="image/x-icon" href="{% static 'images/faviconImg.png' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="description"
+    content="Shop the latest fashion trends at Fashion Hub. Discover stylish clothing for men, women, and kids with free shipping on orders over $50.">
+  <meta name="keywords"
+    content="clothing, fashion, online store, e-commerce, men's clothing, women's clothing, kids' clothing, accessories, trendy outfits, affordable fashion">
+  <meta name="author" content="Angel Aquino">
+  <meta name="robots" content="index, follow">
+  <style>
+    :root {
+      --text-color: #120E16;
+      --second-color: #613FE5;
+      --color-body: #F6F6F7;
+      --header-color: #B5B5B5;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      color:var(--color-body);
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      background-color: var(--text-color);
+      border-color: var(--text-color) ;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--second-color) ;
+      border-color: var(--second-color) ;
+    }
+
+    .product-card {
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      background-color: var(--color-body);
+      width: 100%;
+      height: fit-content;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px #613FE5;
+    }
+
+    .product-image {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-title {
+      color: var(--text-color);
+    }
+
+    #reviews {
+      background-color: var(--color-body) ;
+    }
+
+    #about {
+      background-color: var(--second-color) ;
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 4px 6px #B5B5B5;
+      transition: transform 0.3s ease;
+
+
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px #613FE5;
+
+    }
+
+    .card {
+      border: none;
+      box-shadow: 0 4px 6px #B5B5B5;
+      transition: transform 0.3s ease;
+
+
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px #613FE5;
+
+    }
+
+    .card-privy {
+      border: none;
+      box-shadow: 0 4px 6px #B5B5B5;
+      transition: transform 0.3s ease;
+
+
+    }
+
+    .card-privy:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px #613FE5;
+
+    }
+
+    .text-warning {
+      color: var(red) !important;
+    }
+
+    .news-card {
+      margin-bottom: 2rem;
+    }
+
+    .news-image {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .news-card .card {
+      border-bottom: 3px solid var(--second-color);
+      width: 100%;
+      min-height: 20dvh;
+      max-height: fit-content;
+    }
+
+    section h2 {
+      color: var(--text-color);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14dvh;
+      height: 3px;
+      background-color: var(--second-color);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-out;
+    }
+
+    a {
+      color: var(--text-color);
+    }
+
+    a:hover {
+      color: var(--header-color);
+    }
+
+    .bg-light {
+      background-color: var(--second-color) ;
+    }
+
+    /* Estructura de contenedor */
+#container {
+	height: 100vh;
+	display: grid;
+	place-items: center;
+}
+
+.Services h1{
+  font-size: 6rem;
+  font-weight: 800;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 100px;
+  animation: bounce 6s infinite ease;
+  padding-bottom: 80px;
+}
+
+@media screen and (max-width: 600px) {
+  .Services h1 {
+    font-size: 5.5rem; 
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .Services h1 {
+    font-size: 5rem; 
+  }
+}
+
+.overlay .content p{
+  font-weight: 500;
+  font-size: 1.4rem !important;
+}
+
+#slider-container {
+	height: 300px;
+	width: 85vw;
+	max-width: 1400px;
+	position: relative;
+	overflow: hidden;
+	padding: 20px;
+  margin-bottom: 150px;
+  margin-top: -600px;
+}
+
+/* Estilo de imagen */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  filter: grayscale(1); 
+}
+
+.slide:hover img {
+  filter: grayscale(0); 
+  transform: scale(1.05); 
+}
+
+/* Superposición y contenido */
+#slider-container #slider .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.4s ease;
+}
+
+#slider-container #slider .slide:hover .overlay {
+  opacity: 1;
+}
+
+#slider-container #slider .overlay .content {
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+#slider-container #slider .overlay .content h4 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#slider-container #slider .overlay .content p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Botones de navegación */
+#slider-container .btn {
+	position: absolute;
+	top: calc(50% - 30px);
+	height: 15px;
+	width: 15px;
+	border-left: 8px solid #696969;
+	border-top: 8px solid #696969;
+	cursor: pointer;
+}
+
+#slider-container .btn:hover {
+	transform: scale(1.2);
+}
+
+#slider-container .btn.inactive {
+	border-color: #282828;
+}
+
+#slider-container .btn:first-of-type {
+	transform: rotate(-45deg);
+	left: 10px;
+}
+
+#slider-container .btn:last-of-type {
+	transform: rotate(135deg);
+	right: 10px;
+}
+
+#slider-container #slider {
+	display: flex;
+	width: 1000%;
+	height: 100%;
+	transition: all .5s;
+}
+
+#slider-container #slider .slide {
+	width: 100%; 
+	height: 100%;
+	margin: auto 10px;
+	background-color: #b5b5b5;
+	border-radius: 5px;
+	box-shadow: 2px 2px 4px 2px white, -2px -2px 4px 2px white;
+	display: grid;
+	place-items: center;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Responsive design */
+@media only screen and (min-width: 1100px) {
+	#slider-container #slider .slide {
+		width: calc(2.5% - 20px);
+	}
+}
+
+@media only screen and (max-width: 1100px) {
+	#slider-container #slider .slide {
+		width: calc(3.3333333% - 20px);
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	#slider-container #slider .slide {
+		width: calc(5% - 20px);
+	}
+}
+
+@media only screen and (max-width: 550px) {
+	#slider-container #slider .slide {
+		width: calc(10% - 20px);
+	}
+}
+
+  </style>
+</head>
+
+<body>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Kluster</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#products">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#reviews">Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#news">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/services">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary ms-2" href="/index">Go to the App</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="hero">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-lg-6">
+          <h1>Walk with Style</h1>
+          <p class="lead">Discover our exclusive collection of premium footwear</p>
+          <a href="/index.html" class="btn btn-primary btn-lg">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Featured Products</h2>
+      <div id="productsList" class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card product-card">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80"
+              class="card-img-top product-image" alt="Classic Sneakers">
+            <div class="card-body">
+              <h5 class="card-title">Classic Sneakers</h5>
+              <p class="card-text">Perfect for your daily routine</p>
+              <p class="card-text"><strong>€89.99</strong></p>
+              <button class="btn btn-primary">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card product-card">
+            <img src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&q=80"
+              class="card-img-top product-image" alt="Elegant Dress Shoes">
+            <div class="card-body">
+              <h5 class="card-title">Elegant Dress Shoes</h5>
+              <p class="card-text">Sophisticated and comfortable</p>
+              <p class="card-text"><strong>€129.99</strong></p>
+              <button class="btn btn-primary">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card product-card">
+            <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&q=80"
+              class="card-img-top product-image" alt="Casual Sneakers">
+            <div class="card-body">
+              <h5 class="card-title">Casual Sneakers</h5>
+              <p class="card-text">Perfect for daily use</p>
+              <p class="card-text"><strong>€69.99</strong></p>
+              <button class="btn btn-primary">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5">Customer Reviews</h2>
+      <div id="reviewsList" class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">María García</h5>
+              <p class="card-text">"Amazing quality and comfort! The best shoes I have ever bought."</p>
+              <div class="text-warning">★★★★★</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Carlos Rodríguez</h5>
+              <p class="card-text">"Great selection and excellent customer service!"</p>
+              <div class="text-warning">★★★★★</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ana Martínez</h5>
+              <p class="card-text">"Perfect fit and elegant designs. Highly recommended!"</p>
+              <div class="text-warning">★★★★★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Latest News</h2>
+      <div id="newsList" class="row">
+        <div class="col-md-6 news-card fade-in">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&q=80"
+              class="card-img-top news-image" alt="Collection Launch Summer">
+            <div class="card-body">
+              <h5 class="card-title">Summer Collection Launch</h5>
+              <p class="card-text">Discover our new summer collection with breathable and comfortable designs. elegant.
+              </p>
+              <p class="text-muted">03/15/2024</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 news-card fade-in">
+          <div class="card">
+            <img src="https://images.unsplash.com/photo-1602872030219-ad2b9a54315c?auto=format&fit=crop&q=80"
+              class="card-img-top news-image" alt="Sustainable Fashion Initiative">
+            <div class="card-body">
+              <h5 class="card-title">Sustainable Fashion Initiative Sustainable</h5>
+              <p class="card-text">We're going green! Check out our line of environmentally friendly shoes.</p>
+              <p class="text-muted">03/10/2024 </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="Services" id="Services">
+    <div id="container">
+        <h1>Thank You for your visit!!!!</h1>
+        <div id="slider-container">
+            <span onclick="slideRight()" class="btn"></span>
+            <div id="slider">
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="img">
+                    <div class="overlay">
+                        <div class="content">
+                            <h4 style="font-weight: bold;">Thank You for Your Purchase</h4>
+                            <p>"Thank you for choosing us! Your purchase means a lot to us. We hope you enjoy your new clothes and look fabulous!"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://plus.unsplash.com/premium_photo-1675186049222-0b5018db6ce9?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="img">
+                    <div class="overlay">
+                        <div class="content">
+                            <h4 style="font-weight: bold;">Thank You for Your Loyalty</h4>
+                            <p>"Thank you for being part of the Fashion Hub family! Your loyalty is invaluable and motivates us to keep offering the best in fashion."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="img">
+                    <div class="overlay">
+                        <div class="content">
+                            <h4 style="font-weight: bold;">Thank You for Your Feedback</h4>
+                            <p>"Thank you for sharing your thoughts! We value your feedback and are committed to improving your shopping experience."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src=https://images.unsplash.com/photo-1702135877677-d269abe86e36?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="img">
+                    <div class="overlay">
+                        <div class="content">
+                            <h4 style="font-weight: bold;">Thank You for Following Us</h4>
+                            <p>"Thank you for following us on social media! Your support helps us grow and share the latest trends with you."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://plus.unsplash.com/premium_photo-1695575576052-7c271876b075?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="img">
+                    <div class="overlay">
+                        <div class="content">
+                            <h4 style="font-weight: bold;">Thank You for Visiting</h4>
+                            <p>"Thank you for visiting us! We’re glad to have had you in our store. We hope to see you again soon to discover more styles."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                  <img src="https://images.unsplash.com/photo-1545291730-faff8ca1d4b0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="img">
+                  <div class="overlay">
+                      <div class="content">
+                          <h4 style="font-weight: bold;">Thank You for Referring Us</h4>
+                          <p>""Thank you for recommending our store to your friends and family! Your trust in us is the greatest compliment we can receive."</p>
+                      </div>
+                  </div>
+              </div>
+
+            </div>
+            <span onclick="slideLeft()" class="btn"></span>
+        </div>
+    </div>
+</section>
+
+<script>
+var container = document.getElementById('container')
+        var slider = document.getElementById('slider');
+        var slides = document.getElementsByClassName('slide').length;
+        var buttons = document.getElementsByClassName('btn');
+
+        var currentPosition = 0;
+        var currentMargin = 0;
+        var slidesPerPage = 0;
+        var slidesCount = slides - slidesPerPage;
+        var containerWidth = container.offsetWidth;
+        var prevKeyActive = false;
+        var nextKeyActive = true;
+
+        window.addEventListener("resize", checkWidth);
+
+        function checkWidth() {
+            containerWidth = container.offsetWidth;
+            setParams(containerWidth);
+        }
+
+        function setParams(w) {
+            if (w < 551) {
+                slidesPerPage = 1;
+            } else {
+                if (w < 901) {
+                    slidesPerPage = 3;
+                } else {
+                    if (w < 1101) {
+                        slidesPerPage = 3;
+                    } else {
+                        slidesPerPage = 4;
+                    }
+                }
+            }
+            slidesCount = slides - slidesPerPage;
+            if (currentPosition > slidesCount) {
+                currentPosition -= slidesPerPage;
+            };
+            currentMargin = - currentPosition * (100 / slidesPerPage);
+            slider.style.marginLeft = currentMargin + '%';
+            if (currentPosition > 0) {
+                buttons[0].classList.remove('inactive');
+            }
+            if (currentPosition < slidesCount) {
+                buttons[1].classList.remove('inactive');
+            }
+            if (currentPosition >= slidesCount) {
+                buttons[1].classList.add('inactive');
+            }
+        }
+
+        setParams();
+
+        function slideRight() {
+            if (currentPosition != 0) {
+                slider.style.marginLeft = currentMargin + (100 / slidesPerPage) + '%';
+                currentMargin += (100 / slidesPerPage);
+                currentPosition--;
+            };
+            if (currentPosition === 0) {
+                buttons[0].classList.add('inactive');
+            }
+            if (currentPosition < slidesCount) {
+                buttons[1].classList.remove('inactive');
+            }
+        };
+
+        function slideLeft() {
+            if (currentPosition != slidesCount) {
+                slider.style.marginLeft = currentMargin - (100 / slidesPerPage) + '%';
+                currentMargin -= (100 / slidesPerPage);
+                currentPosition++;
+            };
+            if (currentPosition == slidesCount) {
+                buttons[1].classList.add('inactive');
+            }
+            if (currentPosition > 0) {
+                buttons[0].classList.remove('inactive');
+            }
+        };
+      </script>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% include "ecom/footerhome.html" %}
+</body>
+
+</html>

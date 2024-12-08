@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description"
+    content="Shop the latest fashion trends at Fashion Hub. Discover stylish clothing for men, women, and kids with free shipping on orders over $50.">
+  <meta name="keywords"
+    content="clothing, fashion, online store, e-commerce, men's clothing, women's clothing, kids' clothing, accessories, trendy outfits, affordable fashion">
+  <meta name="author" content="Angel Aquino">
+  <meta name="robots" content="index, follow">
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="{% static 'images/faviconImg.png' %}">
+  <title>Kluster</title>
+  <style media="screen">
+    .footer {
+      position: fixed;
+    }
+  </style>
+</head>
+
+<body>
+  {% include "ecom/navbar.html" %}
+
+  <br><br><br>
+  <h3 style="text-align:center;">"At Kluster, we are passionate about fashion and we want to offer you the best clothes
+    so that you feel amazing every day. Our online store offers quality clothing, accessories and footwear, designed so
+    that you always find the latest in trends."
+    <br>
+    <br>
+    Since our creation in 2020, we have worked to provide you with an easy, fast and safe shopping experience. We love
+    keeping our prices affordable so that you can enjoy a unique style without spending too much.
+    <br>
+    <br>
+    What sets us apart:
+    <br>
+    <br>
+    Current fashion: We always have the latest in trends.
+    <br>
+    <br>
+    Quality: Comfortable and durable clothing.
+    <br>
+    <br>
+    Fair prices: Because we believe that fashion should be accessible to everyone.
+    <br>
+    <br>
+    Thank you for choosing us. We hope you enjoy your purchase!
+  </h3>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  {% include "ecom/footerhome.html" %}
+</body>
+
+</html>
