@@ -3,6 +3,19 @@ from django.contrib import admin
 from django.urls import path
 from ecom import views
 from django.contrib.auth.views import LoginView,LogoutView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import (
+    TokenObtainSlidingView,
+    TokenRefreshSlidingView,
+)
+
+router = DefaultRouter()
+router.register(r'customers', views.CustomerViewSet)
+router.register(r'products', views.ProductViewSet)
+router.register(r'orders', views.OrderViewSet)
+router.register(r'feedback', views.FeedbackViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),  # Ruta para el panel de administración
     path('', views.new_home_view, name='home'),  # Nueva vista de inicio
@@ -55,6 +68,10 @@ urlpatterns = [
     path('remove-from-cart/<int:pk>', views.remove_from_cart_view,name='remove-from-cart'),
     path('customer-address', views.customer_address_view,name='customer-address'),
     path('payment-success', views.payment_success_view,name='payment-success'),
-
+    path('api/', include(router.urls)), 
+    path('api/token/', TokenObtainSlidingView.as_view(), name='token_obtain'),
+    path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh'),
 
 ]
+
+
