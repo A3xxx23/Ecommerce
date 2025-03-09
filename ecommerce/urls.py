@@ -6,7 +6,7 @@ from django.contrib.auth.views import LoginView,LogoutView
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
-    TokenObtainSlidingView,
+    TokenObtainPairView,
     TokenRefreshSlidingView,
 )
 
@@ -17,10 +17,10 @@ router.register(r'orders', views.OrderViewSet)
 router.register(r'feedback', views.FeedbackViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Ruta para el panel de administración
-    path('', views.new_home_view, name='home'),  # Nueva vista de inicio
-    path('index/', views.home_view, name='index'),  # Vista index existente
-    path('afterlogin/',views.afterlogin_view, name='afterlogin'),  # Asegúrate de tener la barra al final
+    path('admin/', admin.site.urls),  
+    path('', views.new_home_view, name='home'),  
+    path('index/', views.home_view, name='index'),  
+    path('afterlogin/',views.afterlogin_view, name='afterlogin'), 
     path('logout/', LogoutView.as_view(template_name='ecom/logout.html'), name='logout'),
     path('index.html', views.home_view, name='index_html'), 
 
@@ -69,9 +69,9 @@ urlpatterns = [
     path('customer-address', views.customer_address_view,name='customer-address'),
     path('payment-success', views.payment_success_view,name='payment-success'),
     path('api/', include(router.urls)), 
-    path('api/token/', TokenObtainSlidingView.as_view(), name='token_obtain'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh'),
-
+    path('accounts/', include('allauth.urls')),
 ]
 
 
