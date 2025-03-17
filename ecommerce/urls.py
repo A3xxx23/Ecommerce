@@ -1,6 +1,7 @@
-
+from ecom.views import create_checkout_session
 from django.contrib import admin
 from django.urls import path
+from django.shortcuts import redirect
 from ecom import views
 from django.contrib.auth.views import LoginView,LogoutView
 from django.urls import path, include
@@ -8,6 +9,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshSlidingView,
+    
 )
 
 router = DefaultRouter()
@@ -16,62 +18,17 @@ router.register(r'products', views.ProductViewSet)
 router.register(r'orders', views.OrderViewSet)
 router.register(r'feedback', views.FeedbackViewSet)
 
+def redirect_to_api(request):
+    return redirect('/api/') 
+
 urlpatterns = [
     path('admin/', admin.site.urls),  
-    path('', views.new_home_view, name='home'),  
-    path('index/', views.home_view, name='index'),  
-    path('afterlogin/',views.afterlogin_view, name='afterlogin'), 
-    path('logout/', LogoutView.as_view(template_name='ecom/logout.html'), name='logout'),
-    path('index.html', views.home_view, name='index_html'), 
-
-    path('aboutus', views.aboutus_view),
-
-    path('policyandprivacy', views.policyandprivacy_view),
-
-    path('services', views.services_view, name="service.html"),
-
-    path('contactus', views.contactus_view,name='contactus'),
-    path('search', views.search_view,name='search'),
-    path('send-feedback', views.send_feedback_view,name='send-feedback'),
-    path('view-feedback', views.view_feedback_view,name='view-feedback'),
-
-    path('adminclick', views.adminclick_view),
-    path('adminlogin', LoginView.as_view(template_name='ecom/adminlogin.html'),name='adminlogin'),
-    path('admin-dashboard', views.admin_dashboard_view,name='admin-dashboard'),
-
-    path('view-customer', views.view_customer_view,name='view-customer'),
-    path('delete-customer/<int:pk>', views.delete_customer_view,name='delete-customer'),
-    path('update-customer/<int:pk>', views.update_customer_view,name='update-customer'),
-
-    path('admin-products', views.admin_products_view,name='admin-products'),
-    path('admin-add-product', views.admin_add_product_view,name='admin-add-product'),
-    path('delete-product/<int:pk>', views.delete_product_view,name='delete-product'),
-    path('update-product/<int:pk>', views.update_product_view,name='update-product'),
-
-    path('admin-view-booking', views.admin_view_booking_view,name='admin-view-booking'),
-    path('delete-order/<int:pk>', views.delete_order_view,name='delete-order'),
-    path('update-order/<int:pk>', views.update_order_view,name='update-order'),
-
-
-    path('customersignup', views.customer_signup_view),
-    path('customerlogin', LoginView.as_view(template_name='ecom/customerlogin.html'),name='customerlogin'),
-    path('customer-home', views.customer_home_view,name='customer-home'),
-    path('my-order', views.my_order_view,name='my-order'),
-    # path('my-order', views.my_order_view2,name='my-order'),
-    path('my-profile', views.my_profile_view,name='my-profile'),
-    path('edit-profile', views.edit_profile_view,name='edit-profile'),
-    path('download-invoice/<int:orderID>/<int:productID>', views.download_invoice_view,name='download-invoice'),
-
-
-    path('add-to-cart/<int:pk>', views.add_to_cart_view,name='add-to-cart'),
-    path('cart', views.cart_view,name='cart'),
-    path('remove-from-cart/<int:pk>', views.remove_from_cart_view,name='remove-from-cart'),
-    path('customer-address', views.customer_address_view,name='customer-address'),
-    path('payment-success', views.payment_success_view,name='payment-success'),
     path('api/', include(router.urls)), 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshSlidingView.as_view(), name='token_refresh'),
-    path('accounts/', include('allauth.urls')),
+    path("create-checkout-session/", create_checkout_session, name="checkout"),
+    path('', redirect_to_api),  
 ]
+
 
 

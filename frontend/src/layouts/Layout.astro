@@ -1,6 +1,26 @@
 ---
 import "../styles/global.css";
+import Navbar from "../components/Navbar.jsx";
 ---
 
-<h1 class="text-4xl font-bold text-blue-500">Tailwind en Astro funciona</h1>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>A & N - Ecommerce</title>
+    <link rel="icon" href="/logo.PNG" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"><div class="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#d5c5ff,transparent)]"></div></div>
+    <Navbar/>
+    <slot /> 
+  </body>
+</html>
 
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
