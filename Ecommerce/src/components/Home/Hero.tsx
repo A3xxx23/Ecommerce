@@ -5,7 +5,7 @@ export const Hero = () => {
         <div>
     <div className="flex flex-col items-center justify-center w-full py-32">
         <h1 className="text-6xl font-bold text-center animate-text-gradient inline-flex bg-gradient-to-r from-neutral-900 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight text-transparent  dark:via-slate-400 dark:to-neutral-400">Welcome to A & N Ecommerce</h1>
-        <p className="text-2xl font-normal mt-2 text-center leading-6 text-black ">The best place to shop online</p>
+        <p className="text-lg font-normal mt-2 text-center leading-6 text-black ">The best place to shop online</p>
         <div className="mt-10 flex gap-4">
         <Link to="/Shop All">
                 <button className="inline-flex items-center justify-center text-sm font-medium bg-gray-600 rounded-full bg-secondary text-secondary-foreground hover:bg-slate-400 transition-all h-10 px-4 py-2">
