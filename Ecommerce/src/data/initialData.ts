@@ -370,6 +370,7 @@ export const newArrivalsProducts = [
     },
 ];
 
+////Feautes products
 
 export const FeaturesProducts = [
     {
@@ -464,4 +465,101 @@ export const FeaturesProducts = [
             },
         ],
     },
+
+    {
+        brand: 'Uniqlo',
+        colors: [
+            { color: '#FFFFFF', color_name: 'White' },
+            { color: '#000000', color_name: 'Black' },
+        ],
+        created_at: new Date().toISOString(),
+        description: {
+            type: 'doc',
+            content: [
+                {
+                    type: 'paragraph',
+                    content: [
+                        {
+                            type: 'text',
+                            text: 'Uniqlo ultra light down jacket, perfect for chilly weather.',
+                        },
+                    ],
+                },
+            ],
+        },
+        features: ['Lightweight', 'Packable', 'Warm'],
+        id: 'h1i2j3ea-2a40-4ec7-a6d0-b7c95888ff',
+        img: ['https://ui.shadcn.com/placeholder.svg'],
+        name: 'Uniqlo Down Jacket',
+        price: 79.99,
+        slug: 'uniqlo-down-jacket',
+        variants: [
+            {
+                color: '#FFFFFF',
+                color_name: 'White',
+                id: 'm6n814b7-fe26-4e08-8a6f-13a39da43e64',
+                price: 79.99,
+                stock: 15,
+                size: 'M',
+            },
+            {
+                color: '#000000',
+                color_name: 'Black',
+                id: 'm6n814b7-fe26-4e08-8a6f-13a39da43e65',
+                price: 79.99,
+                stock: 10,
+                size: 'L',
+            },
+        ],
+    },
+    {
+        brand: 'Gap',
+        colors: [
+            { color: '#FFD700', color_name: 'Gold' },
+            { color: '#C0C0C0', color_name: 'Silver' },
+        ],
+        created_at: new Date().toISOString(),
+        description: {
+            type: 'doc',
+            content: [
+                {
+                    type: 'paragraph',
+                    content: [
+                        {
+                            type: 'text',
+                            text: 'Gap hoodie, perfect for casual outings and lounging at home.',
+                        },
+                    ],
+                },
+            ],
+        },
+        features: ['Soft fleece', 'Kangaroo pocket', 'Relaxed fit'],
+        id: 'i2j3k4ea-2a40-4ec7-a6d0-b7c95888ff',
+        img: ['https://ui.shadcn.com/placeholder.svg'],
+        name: 'Gap Hoodie',
+        price: 49.99,
+        slug: 'gap-hoodie',
+        variants: [
+            {
+                color: '#FFD700',
+                color_name: 'Gold',
+                id: 'n7o814b7-fe26-4e08-8a6f-13a39da43e66',
+                price: 49.99,
+                stock: 25,
+                size: 'L',
+            },
+            {
+                color: '#C0C0C0',
+                color_name: 'Silver',
+                id: 'n7o814b7-fe26-4e08-8a6f-13a39da43e67',
+                price: 49.99,
+                stock: 20,
+                size: 'M',
+            },
+        ],
+    },
+]
+
+export const AllProducts = [
+
 ]
