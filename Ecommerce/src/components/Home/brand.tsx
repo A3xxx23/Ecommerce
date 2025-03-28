@@ -62,7 +62,7 @@ export const Brands = () => {
               href={brand.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center h-32 w-32 md:h-40 md:w-40 bg-gradient-to-b from-black/10 via-black/5 to-transparent px-6 py-4 rounded-lg"
+              className="flex flex-col items-center justify-center h-32 w-32 md:h-40 md:w-40 bg-gradient-to-b from-black/10 via-black/5 to-transparent px-6 py-4 rounded-lg hover:opacity-80"
             >
               <img
                 src={brand.image}
