@@ -13,7 +13,7 @@ export const RootLayout = () => {
 
       {pathname === '/' && <Hero/>}
 
-      <main className='container my-8 flex-1'>
+      <main className='container mx-auto my-8 flex-1'>
       <Outlet />
       </main>
 
