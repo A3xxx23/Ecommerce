@@ -30,7 +30,7 @@ export const SocialLinks = [
     {
         id: 1,
         title: 'Github',
-        href: 'https://github.com/A3xxx23/Ecommerce',
+        href: 'https://github.com/A3xxx23/',
         icon: IconBrandGithub,
     },
     {
