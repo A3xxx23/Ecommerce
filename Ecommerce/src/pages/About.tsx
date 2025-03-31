@@ -115,7 +115,7 @@ export const About = () => {
     <div className="flex flex-wrap justify-center gap-2 pt-7">
       <img src="./public/stack/react_dark.svg" alt="React" className="h-12 w-12"/>
       <img src="./public/stack/supabase.svg" alt="Supabase" className="h-12 w-12" />
-      <img src="./public/stack/reactquery.svg" alt="ReactQuery" className="h-12 w-12" />
+      <img src="./public/stack/tanstack.svg" alt="Tan Stack" className="h-12 w-12" />
       <img src="./public/stack/reactrouter.svg" alt="ReactRouter" className="h-12 w-12" />
       <img src="./public/stack/stripe.svg" alt="Stripe" className="h-12 w-12"/>
       <img src="./public/stack/tailwindcss.svg" alt="tailwindCSS" className="h-12 w-12" />

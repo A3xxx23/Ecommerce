@@ -1,12 +1,17 @@
 import { CardProducts } from "../components/products/CardProducts"
 import { ContainerFilter } from "../components/products/ContainerFilter";
-import { allProducts } from "../data/initialData"
 import { PreparedProducts } from "../helpers"
+import { useProducts } from "../hooks";
 
 export const ShopAll = () => {
 
-    const preparedProducts = PreparedProducts(allProducts);
+    const { products , isLoading} = useProducts();
 
+    //Si esta loading o es product es nulll retornar cargando
+
+    if(isLoading || !products) return <p>Cargando...</p>
+
+    const preparedProducts = PreparedProducts(products);
 
     return (
     <>
@@ -27,10 +32,11 @@ export const ShopAll = () => {
                         name={product.name}
                         price={product.price}
                         colors={product.colors}
-                        img={product.img[0]}
+                        img={product.images[0]}
                         slug={product.slug}
                         variants={product.variants}
                     />
+                    
                      ))}
                 </div>
             </div>
