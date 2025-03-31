@@ -1,5 +1,17 @@
 import { Color, Product, variantProduct } from "../interfaces";
 
+//Funcion para el precio en dolar
+
+export const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits:2,
+    }
+    ).format(price)
+};
+
 //prepare prodcuts
 
 export const PreparedProducts = (products: Product[]) =>{

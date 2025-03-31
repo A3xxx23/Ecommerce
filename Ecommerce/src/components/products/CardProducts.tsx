@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { IconPlus } from '@tabler/icons-react';
 import { useState } from "react";
 import { variantProduct } from "../../interfaces";
+import { formatPrice } from "../../helpers";
 
 interface Props {
     img: string;
@@ -62,7 +63,7 @@ export const CardProducts = ({
 
             <div className="flex flex-col gap-1 items-center">
                 <p className="text-[15px] font-medium text-black">{name}</p>
-                <p className="text-[15px] font-medium text-black">{price}</p>
+                <p className="text-[15px] font-medium text-black">{formatPrice(price)}</p>
                
                <div className="flex gap-3">
                 {
