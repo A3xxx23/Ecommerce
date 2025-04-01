@@ -20,7 +20,7 @@ export const Products = ({ title, products }: Props) => {
                         name={product.name}
                         price={product.price}
                         colors={product.colors}
-                        img={product.img[0]}
+                        img={product.images[0]}
                         slug={product.slug}
                         variants={product.variants}
                     />

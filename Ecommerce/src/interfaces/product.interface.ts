@@ -30,7 +30,7 @@ export interface Color{
 export interface PreparedProducts{
     id: string;
     name: string;
-    img: string[];
+    images: string[];
     brand: string;
     features: string[];
     description: Json;

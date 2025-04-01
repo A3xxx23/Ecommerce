@@ -87,24 +87,26 @@ export const About = () => {
         </div>
       </div>
 
-      <div className="col-span-1 xl:row-span-4">
+      <div className="col-span-1 xl:row-span-3">
   <div className="grid-container bg-black rounded-lg shadow-lg p-2">
     <div className="rounded-3xl w-full sm:h-[250px] h-fit flex justify-center items-center">
       <img src="/logoRemove.png" alt="Logo" className="max-w-[150px] max-h-[150px] object-contain" />
     </div>
     <div className="mt-6 text-center">
       <p className="grid-headtext text-gray-300 text-lg font-semibold leading-relaxed ">
-      A&N Ecommerce was born with the vision of creating an online store that is not only functional, but also visually appealing and easy to use.
+      A&N Ecommerce was born with the vision of creating an online store that is not only functional, 
+      but also visually appealing and easy to use.
       </p>
       <p className="grid-subtext text-gray-100 text-lg font-semibold mt-4 leading-relaxed">
-      We focus on offering an intuitive, fluid, and modern user experience, combining design and technology to make every interaction enjoyable and efficient.
+      We focus on offering an intuitive, fluid, and modern user experience, combining design and technology 
+      to make every interaction enjoyable and efficient.
       </p>
     </div>
   </div>
 </div>
 
 
-      <div className="xl:col-span-2 xl:row-span-3">
+  <div className="xl:col-span-2 xl:row-span-3">
   <div className="grid-container bg-black rounded-lg shadow-lg p-12 flex flex-col items-center">
     <p className="grid-headtext text-gray-300 lg:text-3xl font-bold mb-2 sm:text-2xl pt-3 sm:text-center bg-gradient-to-r from-neutral-900 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight dark:via-slate-400 dark:to-neutral-400">🚀 Technology Behind A&N Ecommerce</p>
     <p className="grid-subtext text-gray-100 lg:text-lg text-center mb-4 sm:text-md pt-7">
@@ -159,7 +161,7 @@ export const About = () => {
             target="_blank" 
             rel="noreferrer"
           >
-            <link.icon className="w-8 h-8 text-white hover:text-gray-500 pb-1" />
+            <link.icon className="w-8 h-12 text-white hover:text-gray-500 pb-1" />
           </a>
         ))}
       </div>

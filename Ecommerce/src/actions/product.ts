@@ -32,7 +32,7 @@ export const getFilteredProducts = async ({
 
     let query = supabase
     .from('products')
-    .select('*, variants(*)', {count:'exact'}) //el coount me devuelve el total de registros en mi BD
+    .select('*, variants(*)', {count:'exact'}) //el count me devuelve el total de registros en mi BD
     .order('created_at', {ascending:false})
     .range(from, to);
 
@@ -53,4 +53,42 @@ export const getFilteredProducts = async ({
 
     return { data, count};
 
+};
+
+/// Funcion para obtener el producto mas reciente
+
+export const getRecentProducts = async () => {
+    const { data:products, error} = await supabase
+    .from('products')
+    .select('*, variants(*)',) 
+    .order('created_at', {ascending:false})
+    .limit(4);
+
+    if(error){
+        console.log(error.message);
+        throw new Error(error.message);
+    }
+
+    return products;
+};
+
+/// Funcion para obtener los productos random
+
+export const getRandomProducts = async () => {
+    const { data:products, error} = await supabase
+    .from('products')
+    .select('*, variants(*)',) 
+    .order('created_at', {ascending:false})
+    .limit(20);
+
+    if(error){
+        console.log(error.message);
+        throw new Error(error.message);
+    }
+
+    const randomProducts = products
+    .sort(()=> 0.5 - Math.random())
+    .slice(0, 8);
+
+    return randomProducts;
 };

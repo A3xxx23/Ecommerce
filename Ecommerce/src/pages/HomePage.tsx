@@ -1,27 +1,47 @@
 import { Brands } from '../components/Home/brand'
 import {Products} from '../components/Home/Products'
 import { Services } from '../components/Home/Services'
-import { newArrivalsProducts, FeaturesProducts } from '../data/initialData'
+import { ProductGridSkeleton } from '../components/skeleton/productGridSkeleton'
 import { PreparedProducts } from '../helpers'
+import { useHomeProducts } from '../hooks'
+
 
 export const HomePage = () => {
 
-    const preparednewArrivalsProducts = PreparedProducts(newArrivalsProducts);
-    const preparedFeaturesProducts = PreparedProducts(FeaturesProducts);
+    const { recentProducts,popularProducts, isLoading } = useHomeProducts();
+
+    const preparednewArrivalsProducts = PreparedProducts(recentProducts);
+    const preparedFeaturesProducts = PreparedProducts(popularProducts);
 
     return (
         <div>
             <Services/>
 
-            <Products
-            title='New Arrivals' 
+            {
+                isLoading ? (
+                    <ProductGridSkeleton
+                    numberOfProducts={4}
+                    />
+                ) : (
+                    <Products
+            title='Recent Products' 
             products={preparednewArrivalsProducts}
             />
+                )
+            }
 
-            <Products
-            title='Featured Products' 
+{
+                isLoading ? (
+                    <ProductGridSkeleton
+                    numberOfProducts={4}
+                    />
+                ) : (
+                    <Products
+            title='Popular Products' 
             products={preparedFeaturesProducts}
             />
+                )
+            }
 
             <Brands/>
   
