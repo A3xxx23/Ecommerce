@@ -3,17 +3,40 @@ import { Separator } from "../shared/Separator";
 const availableBrands = [
     "Nike",
     "Chrome Hearts",
-    "Erick Emanuel",
+    "Eric Emanuel",
     "Essentials",
     "Gallery Dept",
     "New Balance",
-    "RHUDE",
+    "Rhude",
     "Adidas",
     "Denim Tears",
-    "Godspeed"
+    "Godspeed",
+    "Hellstar",
 ]
 
-export const ContainerFilter = () => {
+interface Props{
+    selectedBrands: string[];
+    setSelectedBrands: (brands: string[]) => void;
+}
+
+//desesctructuramos las props
+
+//resivimos la marca y si la marca no esta seleccionada se agrega
+//si la marca esta en el array de selectedBrands se elimina
+
+export const ContainerFilter = ({ 
+    selectedBrands, setSelectedBrands }: Props) => {
+
+    const handleBrandChange = (brand: string) => {
+        //verificamos si el brand esta en el array de selectedBrands
+        if(selectedBrands.includes(brand)){
+            //si esta lo quitamos
+            setSelectedBrands(selectedBrands.filter(b => b !== brand));
+        } else {
+            setSelectedBrands([...selectedBrands,brand]);
+        }
+    };
+
     return <div className="p-5 border border-slate-200 rounded-lg h-fit col-span-2 lg:col-span-1">
         <h3 className="text-xl mb-4 font-semibold">
             Filters
@@ -29,6 +52,8 @@ export const ContainerFilter = () => {
                         <input 
                         type='checkbox'
                         className="text-black border-black focus:ring-black accent-black"
+                        checked = {selectedBrands.includes(brand)}
+                        onChange={() => handleBrandChange(brand)}
                         />
                         <span className="ml-2 text-gray-700 text-sm cursor-pointer">{brand}</span>
 
