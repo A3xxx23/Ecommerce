@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import { variantProduct } from "../interfaces";
 import { Tag } from "../components/shared/Tag";
 import { Loader } from "../components/shared/Loader";
+import { useCounterStore } from "../store/counter.store";
 
 interface Acc {
     [key:string]: {
@@ -34,6 +35,10 @@ export const ShopAllslug = () => {
     const [selectedVariant, setSelectedVariant] = useState<variantProduct | null>(
         null
     );
+
+    const count = useCounterStore(state => state.count);
+    const increment = useCounterStore(state => state.increment);
+    const decrement = useCounterStore(state => state.decrement);
 
 
     //variante por color
@@ -225,11 +230,16 @@ export const ShopAllslug = () => {
                         </p>
 
                         <div className="flex gap-8 px-5 py-3 border border-slate-200 w-fit rounded-full">
-                            <button>
+                            <button
+                            onClick={decrement}
+                            disabled={count === 1}
+                            >
                                 <IconMinus size={15} className="text-black" />
                             </button>
-                            <span className="text-slate-500 text-sm">1</span>
-                            <button>
+                            <span className="text-slate-500 text-sm">{count}</span>
+                            <button
+                            onClick={increment}
+                            >
                                 <IconPlus size={15} className="text-black" />
                             </button>
 
