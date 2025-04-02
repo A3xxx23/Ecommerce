@@ -1,34 +1,137 @@
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import { Separator } from "../components/shared/Separator"
 import { formatPrice } from "../helpers"
 import { IconMinus, IconPlus, IconTruckDelivery,IconMessage } from '@tabler/icons-react';
 import { ProductDescription } from "../components/one-product/ProductDescription";
 import { GridImages } from "../components/one-product/GridImages";
+import { useProduct } from "../hooks/products/useProduct";
+import { useEffect, useMemo, useState } from "react";
+import { variantProduct } from "../interfaces";
+import { Tag } from "../components/shared/Tag";
+import { Loader } from "../components/shared/Loader";
+
+interface Acc {
+    [key:string]: {
+        name: string,
+        size: string[],
+    }
+}
 
 export const ShopAllslug = () => {
+
+    const {slug} = useParams<{ slug: string }>();
+
+    const { product, isLoading, isError } = useProduct(slug || '');
+
+    const [selectedColor, setSelectedColor] = useState<string | null>(
+        null
+    );
+
+    const [selectedSize, setSelectedSize] = useState<string | null>(
+        null
+    );
+
+    const [selectedVariant, setSelectedVariant] = useState<variantProduct | null>(
+        null
+    );
+
+
+    //variante por color
+    const colors = useMemo(() =>{
+        return product?.variants.reduce(
+            (acc: Acc, variant: variantProduct) => {
+                const {color, color_name, size} = variant;
+                //si no existe poder agregar un nuevo color
+                if(!acc[color]){
+                    acc[color] = {
+                        name: color_name,
+                        size: [],
+                };
+            }
+
+            if (!acc[color].size.includes(size)){
+                acc[color].size.push(size);
+            }
+
+            return acc;
+        },
+        {} as Acc
+    
+    ) || {};
+    }, [product?.variants])
+
+    //obtener el primer color por defecto
+
+    const availableColors = Object.keys(colors)
+    useEffect(() => {
+        if(!selectedColor && availableColors.length > 0){
+            setSelectedColor(availableColors[0]);
+        }
+
+    }, [availableColors, selectedColor]);
+
+    //// actualizar size cuando cambie de color
+
+    useEffect(() => {
+        if(selectedColor && colors[selectedColor] && !selectedSize){
+            setSelectedSize(colors[selectedColor].size[0]);
+        }
+    }, [selectedColor, colors, selectedSize]);
+
+    ///obtener la variante seleccionada
+
+    useEffect(() => {
+        if(selectedColor && selectedSize){
+            const variant = product?.variants.find( variant => 
+                    variant.color === selectedColor && 
+                    variant.size === selectedSize
+            );
+
+            setSelectedVariant(variant as variantProduct);
+        }
+    }, [selectedColor, selectedSize, product?.variants])
+
+    ///obtener el stock
+
+    const isOutOfStock = selectedVariant?.stock === 0;
+
+    if(isLoading) return <Loader />;
+
+    if(!product || isError) 
+        return (
+    <div className="flex justify-center items-center h-[80vh]">
+        <p>
+            product not found
+       </p>
+
+    </div>
+    );
+
+
+
   return (
   <>
       <div className="h-fit flex flex-col md:flex-row gap-16 mt-8">
         {/* Grid para imagenes de cada producto*/}
 
-        <GridImages images={[]}/>
+        <GridImages images={product.images} />
 
         <div className="flex-1 space-y-5">
             <h1 className="text-3xl font-bold tracking-tight text-black ">
-                Hellstar Cap
+                {product.name}
 
             </h1>
 
             <div className="flex gap-5 items-center">
                 <span className="tracking-wide text-lg font-semibold text-black">
-                    {formatPrice(10000)}
+                    {formatPrice(selectedVariant?.price || product.variants[0].price)}
 
                 </span>
 
                 <div className="relative">
                     {/* cuando este agotado */}
 
-                    <span className="text-black">Sold Out</span>
+                    {isOutOfStock && <Tag contentTag="Sold Out" />}
 
                 </div>
 
@@ -39,27 +142,39 @@ export const ShopAllslug = () => {
             {/* caracteristicas del producto */}
 
             <ul className="space-y-2 ml-7 my-10" >
-                <li className="text-sm flex items-center gap-2 tracking-tight font-medium text-black">
+                {product.features.map(feature => (
+                    <li key={feature} className="text-sm flex items-center gap-2 tracking-tight font-medium text-black">
                     <span className="w-[5px] rounded-full bg-black h-[5px]"/>
-                    OS
+                    {feature}
                 </li>
+                ))}
             </ul>
 
             <div className="flex gap-3 flex-col text-black">
-                <p>
-                   Color: Black
+                <p> 
+                   Color: {selectedColor && colors[selectedColor].name}
                 </p>
                 <div className="flex gap-3">
-                    <button 
-                    className={`w-8 h-8 rounded-full flex justify-center items-center ${
-                        true ? "border border-slate-800" : ""
-                    }`}
-                    >
+                    {
+                        availableColors.map(color => (
+                            <button
+                            className={`w-8 h-8 rounded-full flex justify-center items-center ${
+                                selectedColor === color
+                                ? 'border border-slate-800'
+                                : ''
+                            }`}
+                            onClick={() => setSelectedColor(color)}
 
-                        <span className="w-[26px] h-[26px] rounded-full"
-                        style={{background: "#000"}}
-                        />
-                    </button>
+                            >
+                                <span
+                                className="w-[26px] h-[26px] rounded-full" 
+                                style={{ backgroundColor: color }}
+                                />
+
+                                
+
+                            </button>
+                        ))}
                 </div>  
             </div>
 
@@ -71,19 +186,29 @@ export const ShopAllslug = () => {
 
                 </p>
 
-                <div className="flex gap-3">
-                    <select className="border border-gray-300 rounded-lg px-3 py-1">
-                        <option value="">OS</option>
+                {
+                    selectedColor && (
+                    <div className="flex gap-3">
+                        <select className="border border-gray-300 rounded-lg px-3 py-1"
+                        value={selectedSize || ''}
+                        onChange={e => setSelectedSize(e.target.value)}
+                        >
+                            {
+                                colors[selectedColor].size.map(size => (
+                                    <option value={size} key={size}>{size}</option>
+                                ))
+                            }
 
-                    </select>
+                        </select>
 
-                </div>
+                    </div>
+                    )}
             </div>
 
             {/* Comprar */}
 
             {
-                false ? (
+                isOutOfStock ? (
                     <button 
                     className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all
                     duration-300 hover:bg-[#e2e2e2] w-full text-slate-300"
@@ -150,7 +275,7 @@ export const ShopAllslug = () => {
 
       {/* Descripcion del producto */}
 
-      <ProductDescription/>
+      <ProductDescription content={product.description}/>
 
 
   </>

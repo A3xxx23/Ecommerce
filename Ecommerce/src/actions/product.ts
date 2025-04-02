@@ -92,3 +92,20 @@ export const getRandomProducts = async () => {
 
     return randomProducts;
 };
+
+// Funcion para obtener los products slug
+
+export const getProductBySlug = async (slug: string) => {
+    const { data, error} = await supabase
+    .from('products')
+    .select('*, variants(*)',) 
+    .eq('slug', slug)
+    .single(); //single para obtener un solo registro
+
+    if(error){
+        console.log(error.message);
+        throw new Error(error.message);
+    }
+
+    return data;
+};

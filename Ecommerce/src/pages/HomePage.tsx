@@ -1,7 +1,7 @@
 import { Brands } from '../components/Home/brand'
 import {Products} from '../components/Home/Products'
 import { Services } from '../components/Home/Services'
-import { ProductGridSkeleton } from '../components/skeleton/productGridSkeleton'
+import { ProductGridSkeleton } from '../components/skeleton/ProductGridSkeleton'
 import { PreparedProducts } from '../helpers'
 import { useHomeProducts } from '../hooks'
 

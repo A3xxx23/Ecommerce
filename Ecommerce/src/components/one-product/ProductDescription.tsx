@@ -1,16 +1,17 @@
 import { JSONContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { EditorContent } from '@tiptap/react';
+import { Json } from '../../supabase/supabase';
 
 interface Props{
-    content: JSONContent
+    content: JSONContent | Json;
 }
 
 export const ProductDescription = ({content}: Props) => {
     
     const editor = useEditor({
         extensions: [StarterKit],
-        content,
+        content: content as JSONContent,
         editable: false,
         editorProps: {
             attributes: {

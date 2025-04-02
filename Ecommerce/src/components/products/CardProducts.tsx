@@ -3,6 +3,7 @@ import { IconPlus } from '@tabler/icons-react';
 import { useState } from "react";
 import { variantProduct } from "../../interfaces";
 import { formatPrice } from "../../helpers";
+import { Tag } from "../shared/Tag";
 
 interface Props {
     img: string;
@@ -86,7 +87,7 @@ export const CardProducts = ({
 
             <div className="absolute top-2 left-2">
                 {
-                    stock === 0 && <span>Agotado</span>
+                    stock === 0 && < Tag contentTag="Sold Out" />
                 }
 
             </div>
