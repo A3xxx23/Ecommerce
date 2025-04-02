@@ -4,6 +4,7 @@ import { HomePage } from '../pages/HomePage';
 import {About} from '../pages/About'
 import { ContactUs } from "../pages/ContactUs";
 import { ShopAll } from '../pages/ShopAll'
+import { ShopAllslug } from "../pages/ShopAllslug";
 
 export const router = createBrowserRouter([
     {
@@ -25,6 +26,11 @@ export const router = createBrowserRouter([
             {
                 path: "Shop All",
                 element: <ShopAll/>,
+            },
+            {
+                path: 'products/:slug',
+                element: <ShopAllslug/>,
+
             },
             {
                 path: "account",

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @plugin "@midudev/tailwind-animations";
+@plugin "@tailwindcss/typography";
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif,poppins;
