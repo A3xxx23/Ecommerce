@@ -3,8 +3,15 @@ import { navbarLinks } from "../../constants/links";
 import { IconSearch, IconShoppingCart, IconUser,IconMenu2 } from '@tabler/icons-react';
 import { Logo } from "./Logo";
 import { Link } from "react-router-dom";
+import { useGlobalStore } from "../../store/global.store";
 
 export const Navbar = () => {
+
+  // Funcion para abrir el sheet tocando el icono de buscar y el de carrito
+
+  const openSheet = useGlobalStore(state => state.openSheet);
+
+
   return (
     <div>
       <header className='flex justify-between items-center py-4 px-5 lg:px-12'>
@@ -29,7 +36,7 @@ export const Navbar = () => {
         </nav>
 
         <div className="flex items-center gap-5"> 
-          <button>
+          <button onClick={() => openSheet('search')}>
             <IconSearch stroke={1.5} width={25} height={25} className="text-black"/>
           </button>
 
@@ -39,7 +46,8 @@ export const Navbar = () => {
             </Link>
           </div>
 
-          <button className="relative">
+          <button className="relative" 
+          onClick={() => openSheet('cart')}>
             <span className="absolute top-[-5px] right-[-10px] h-4 w-4 bg-red-500 rounded-full flex items-center justify-center text-white text-xs">0</span>
             <IconShoppingCart stroke={1.5} width={25} height={25} className="text-black"/>
           </button>

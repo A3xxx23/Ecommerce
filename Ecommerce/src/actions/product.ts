@@ -109,3 +109,19 @@ export const getProductBySlug = async (slug: string) => {
 
     return data;
 };
+
+// Funcion para obtener los products con el search
+
+export const searchProducts = async (searchTerm: string) => {
+    const {data, error} = await supabase
+    .from('products')
+    .select('*, variants(*)',) 
+    .ilike('name', `%${searchTerm}%`); //ilike para buscar los productos que contengan el término de búsqueda
+
+    if(error) {
+        console.log(error.message);
+        throw new Error(error.message);
+    }
+
+    return data;
+}
