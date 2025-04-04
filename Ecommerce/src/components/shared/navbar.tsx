@@ -4,12 +4,21 @@ import { IconSearch, IconShoppingCart, IconUser,IconMenu2 } from '@tabler/icons-
 import { Logo } from "./Logo";
 import { Link } from "react-router-dom";
 import { useGlobalStore } from "../../store/global.store";
+import { useCartStore } from "../../store/cart.store";
 
 export const Navbar = () => {
+
+  //funcion para el navbar en responsive
+
+  const setActiveNavMobile = useGlobalStore(state => state.setActiveNavMobile);
+
 
   // Funcion para abrir el sheet tocando el icono de buscar y el de carrito
 
   const openSheet = useGlobalStore(state => state.openSheet);
+
+  const totalItemsInCart = useCartStore(state => state.totalItemsInCart);
+  
 
 
   return (
@@ -48,12 +57,14 @@ export const Navbar = () => {
 
           <button className="relative" 
           onClick={() => openSheet('cart')}>
-            <span className="absolute top-[-5px] right-[-10px] h-4 w-4 bg-red-500 rounded-full flex items-center justify-center text-white text-xs">0</span>
+            <span className="absolute top-[-5px] right-[-10px] h-4 w-4 bg-red-500 rounded-full flex items-center justify-center text-white text-xs">
+              {totalItemsInCart}
+            </span>
             <IconShoppingCart stroke={1.5} width={25} height={25} className="text-black"/>
           </button>
         </div>
 
-        <button className="md:hidden">
+        <button className="md:hidden" onClick={() => setActiveNavMobile(true)}>
             <IconMenu2 stroke={1.5} width={25} height={25} className="text-black"/>
 
         </button>

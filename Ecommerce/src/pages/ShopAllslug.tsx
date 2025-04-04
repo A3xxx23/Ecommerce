@@ -1,7 +1,7 @@
-import { Link, useParams } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import { Separator } from "../components/shared/Separator"
 import { formatPrice } from "../helpers"
-import { IconMinus, IconPlus, IconTruckDelivery,IconMessage } from '@tabler/icons-react';
+import { IconMinus, IconPlus, IconTruckDelivery, IconMessage } from '@tabler/icons-react';
 import { ProductDescription } from "../components/one-product/ProductDescription";
 import { GridImages } from "../components/one-product/GridImages";
 import { useProduct } from "../hooks/products/useProduct";
@@ -10,284 +10,264 @@ import { variantProduct } from "../interfaces";
 import { Tag } from "../components/shared/Tag";
 import { Loader } from "../components/shared/Loader";
 import { useCounterStore } from "../store/counter.store";
+import { useCartStore } from "../store/cart.store";
+import toast from "react-hot-toast";
 
 interface Acc {
-    [key:string]: {
+    [key: string]: {
         name: string,
         size: string[],
     }
 }
 
 export const ShopAllslug = () => {
+    const { slug } = useParams<{ slug: string }>();
 
-    const {slug} = useParams<{ slug: string }>();
+    const [currentSlug, setCurrentSlug] = useState(slug);
+    const { product, isLoading, isError } = useProduct(currentSlug || '');
 
-    const { product, isLoading, isError } = useProduct(slug || '');
+    const [selectedColor, setSelectedColor] = useState<string | null>(null);
+    const [selectedSize, setSelectedSize] = useState<string | null>(null);
+    const [selectedVariant, setSelectedVariant] = useState<variantProduct | null>(null);
 
-    const [selectedColor, setSelectedColor] = useState<string | null>(
-        null
-    );
-
-    const [selectedSize, setSelectedSize] = useState<string | null>(
-        null
-    );
-
-    const [selectedVariant, setSelectedVariant] = useState<variantProduct | null>(
-        null
-    );
 
     const count = useCounterStore(state => state.count);
     const increment = useCounterStore(state => state.increment);
     const decrement = useCounterStore(state => state.decrement);
+    const addItem = useCartStore(state => state.addItem);
+    const navigate = useNavigate();
 
-
-    //variante por color
-    const colors = useMemo(() =>{
-        return product?.variants.reduce(
-            (acc: Acc, variant: variantProduct) => {
-                const {color, color_name, size} = variant;
-                //si no existe poder agregar un nuevo color
-                if(!acc[color]){
-                    acc[color] = {
-                        name: color_name,
-                        size: [],
+    // Variante por color
+    const colors = useMemo(() => {
+        if (!product?.variants) return {}; // Retorna un objeto vacío si no hay variantes
+        return product.variants.reduce((acc: Acc, variant: variantProduct) => {
+            const { color, color_name, size } = variant;
+            if (!acc[color]) {
+                acc[color] = {
+                    name: color_name,
+                    size: [],
                 };
             }
-
-            if (!acc[color].size.includes(size)){
+            if (!acc[color].size.includes(size)) {
                 acc[color].size.push(size);
             }
-
             return acc;
-        },
-        {} as Acc
-    
-    ) || {};
-    }, [product?.variants])
+        }, {} as Acc);
+    }, [product?.variants]);
 
-    //obtener el primer color por defecto
-
-    const availableColors = Object.keys(colors)
+    // Obtener el primer color por defecto
+    const availableColors = Object.keys(colors);
     useEffect(() => {
-        if(!selectedColor && availableColors.length > 0){
+        if (!selectedColor && availableColors.length > 0) {
             setSelectedColor(availableColors[0]);
         }
-
     }, [availableColors, selectedColor]);
 
-    //// actualizar size cuando cambie de color
-
+    // Actualizar size cuando cambie de color
     useEffect(() => {
-        if(selectedColor && colors[selectedColor] && !selectedSize){
+        if (selectedColor && colors[selectedColor] && !selectedSize) {
             setSelectedSize(colors[selectedColor].size[0]);
         }
     }, [selectedColor, colors, selectedSize]);
 
-    ///obtener la variante seleccionada
-
+    // Obtener la variante seleccionada
     useEffect(() => {
-        if(selectedColor && selectedSize){
-            const variant = product?.variants.find( variant => 
-                    variant.color === selectedColor && 
-                    variant.size === selectedSize
+        if (selectedColor && selectedSize) {
+            const variant = product?.variants.find(variant =>
+                variant.color === selectedColor &&
+                variant.size === selectedSize
             );
-
             setSelectedVariant(variant as variantProduct);
         }
-    }, [selectedColor, selectedSize, product?.variants])
+    }, [selectedColor, selectedSize, product?.variants]);
 
-    ///obtener el stock
-
+    // Obtener el stock
     const isOutOfStock = selectedVariant?.stock === 0;
 
-    if(isLoading) return <Loader />;
+    // Función para agregar al carrito
+    const addToCart = () => {
+        if (selectedVariant) {
+            const newItem = {
+                variantId: selectedVariant.id,
+                productId: product?.id || '',
+                name: product?.name || '',
+                image: product?.images[0] || '',
+                color: selectedVariant.color_name,
+                size: selectedVariant.size,
+                price: selectedVariant.price,
+                quantity: count,
+            };
+            addItem(newItem);
+            toast.success("Product added to cart", {
+                position: "bottom-right",
+            });
+        }
+    };
 
-    if(!product || isError) 
+    // Función para comprar ahora
+    const buyNow = () => {
+        if (selectedVariant) {
+            addItem({
+                variantId: selectedVariant.id,
+                productId: product?.id || '',
+                name: product?.name || '',
+                image: product?.images[0] || '',
+                color: selectedVariant.color_name,
+                size: selectedVariant.size,
+                price: selectedVariant.price,
+                quantity: count,
+            });
+            navigate('/checkout');
+        }
+    };
+
+    // Función para manejar el cambio de slug cuando cambia en la URL
+
+    useEffect(() => {
+        setCurrentSlug(slug);
+
+        //reiniciar cada vez que cambie el slug los colores, size y variante seleccionada
+        setSelectedColor(null);
+        setSelectedSize(null);
+        setSelectedVariant(null);
+    }, [slug]);
+
+    if (isLoading) return <Loader />;
+
+    if (!product || isError) 
         return (
-    <div className="flex justify-center items-center h-[80vh]">
-        <p>
-            product not found
-       </p>
-
-    </div>
-    );
-
-
-
-  return (
-  <>
-      <div className="h-fit flex flex-col md:flex-row gap-16 mt-8">
-        {/* Grid para imagenes de cada producto*/}
-
-        <GridImages images={product.images} />
-
-        <div className="flex-1 space-y-5">
-            <h1 className="text-3xl font-bold tracking-tight text-black ">
-                {product.name}
-
-            </h1>
-
-            <div className="flex gap-5 items-center">
-                <span className="tracking-wide text-lg font-semibold text-black">
-                    {formatPrice(selectedVariant?.price || product.variants[0].price)}
-
-                </span>
-
-                <div className="relative">
-                    {/* cuando este agotado */}
-
-                    {isOutOfStock && <Tag contentTag="Sold Out" />}
-
-                </div>
-
+            <div className="flex justify-center items-center h-[80vh]">
+                <p>Product not found</p>
             </div>
+        );
 
-            <Separator/>
+    return (
+        <>
+            <div className="h-fit flex flex-col md:flex-row gap-16 mt-8">
+                {/* Grid para imagenes de cada producto */}
+                <GridImages images={product.images} />
 
-            {/* caracteristicas del producto */}
+                <div className="flex-1 space-y-5">
+                    <h1 className="text-3xl font-bold tracking-tight text-black">
+                        {product.name}
+                    </h1>
 
-            <ul className="space-y-2 ml-7 my-10" >
-                {product.features.map(feature => (
-                    <li key={feature} className="text-sm flex items-center gap-2 tracking-tight font-medium text-black">
-                    <span className="w-[5px] rounded-full bg-black h-[5px]"/>
-                    {feature}
-                </li>
-                ))}
-            </ul>
-
-            <div className="flex gap-3 flex-col text-black">
-                <p> 
-                   Color: {selectedColor && colors[selectedColor].name}
-                </p>
-                <div className="flex gap-3">
-                    {
-                        availableColors.map(color => (
-                            <button
-                            className={`w-8 h-8 rounded-full flex justify-center items-center ${
-                                selectedColor === color
-                                ? 'border border-slate-800'
-                                : ''
-                            }`}
-                            onClick={() => setSelectedColor(color)}
-
-                            >
-                                <span
-                                className="w-[26px] h-[26px] rounded-full" 
-                                style={{ backgroundColor: color }}
-                                />
-
-                                
-
-                            </button>
-                        ))}
-                </div>  
-            </div>
-
-            {/* option size */}
-
-            <div className="flex flex-col gap-3">
-                <p className="text-xs font-medium text-black">
-                available size
-
-                </p>
-
-                {
-                    selectedColor && (
-                    <div className="flex gap-3">
-                        <select className="border border-gray-300 rounded-lg px-3 py-1"
-                        value={selectedSize || ''}
-                        onChange={e => setSelectedSize(e.target.value)}
-                        >
-                            {
-                                colors[selectedColor].size.map(size => (
-                                    <option value={size} key={size}>{size}</option>
-                                ))
-                            }
-
-                        </select>
-
-                    </div>
-                    )}
-            </div>
-
-            {/* Comprar */}
-
-            {
-                isOutOfStock ? (
-                    <button 
-                    className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all
-                    duration-300 hover:bg-[#e2e2e2] w-full text-slate-300"
-                    disabled
-                    >
-                        Sold Out
-                    </button>
-                ) : (
-                    <>
-                    {/* Contador */}
-                    <div className="space-y-3">
-                        <p className="text-sm font-medium text-black">
-                            Quantity:
-                        </p>
-
-                        <div className="flex gap-8 px-5 py-3 border border-slate-200 w-fit rounded-full">
-                            <button
-                            onClick={decrement}
-                            disabled={count === 1}
-                            >
-                                <IconMinus size={15} className="text-black" />
-                            </button>
-                            <span className="text-slate-500 text-sm">{count}</span>
-                            <button
-                            onClick={increment}
-                            >
-                                <IconPlus size={15} className="text-black" />
-                            </button>
-
+                    <div className="flex gap-5 items-center">
+                        <span className="tracking-wide text-lg font-semibold text-black">
+                            {formatPrice(selectedVariant?.price || product.variants[0].price)}
+                        </span>
+                        <div className="relative">
+                            {/* Cuando esté agotado */}
+                            {isOutOfStock && <Tag contentTag="Sold Out" />}
                         </div>
                     </div>
 
-                    {/* Botones de accion */}
-                    <div className="flex flex-col gap-3">
-                        <button className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all
-                    duration-300 hover:bg-[#e2e2e2] text-black">
-                        Add to cart
-                        </button>
-                        <button
-                        className="bg-black hover:bg-slate-900 text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full"
-                        >
-                            Buy Now
-                        </button>
-                    </div>
-                    </>
-                )} 
+                    <Separator />
 
-                <div className="flex pt-2">
-                    <div className="flex flex-col gap-1 flex-1 items-center">
-                        <IconTruckDelivery size = {35} className="text-slate-950"/>
-                        <p className="text-xs font-semibold text-black">Free Shipping</p>
-                    </div>
+                    {/* Características del producto */}
+                    <ul className="space-y-2 ml-7 my-10">
+                        {product.features.map(feature => (
+                            <li key={feature} className="text-sm flex items-center gap-2 tracking-tight font-medium text-black">
+                                <span className="w-[5px] rounded-full bg-black h-[5px]" />
+                                {feature}
+                            </li>
+                        ))}
+                    </ul>
 
-                    <Link to = '#' className="flex flex-col gap-1 flex-1 items-center justify-center">
-                        <IconMessage size={30} className="text-slate-950"/>
-                        <p className="flex flex-col items-center text-xs text-black">
-                            <span className="font-semibold text-slate-950">
-                            Do you need help?
-                            </span>
-                            Contact us here
+                    <div className="flex gap-3 flex-col text-black">
+                        <p>
+                            Color: {selectedColor && colors[selectedColor] ? colors[selectedColor].name : 'Select an color'}
                         </p>
-                    </Link>
+                        <div className="flex gap-3">
+                            {availableColors.map(color => (
+                                <button
+                                    key={color}
+                                    className={`w-8 h-8 rounded-full flex justify-center items-center ${selectedColor === color ? 'border border-slate-800' : ''}`}
+                                    onClick={() => setSelectedColor(color)}
+                                >
+                                    <span className="w-[26px] h-[26px] rounded-full" style={{ backgroundColor: color }} />
+                                </button>
+                            ))}
+                        </div>
+                    </div>
 
+                    {/* Opción de tamaño */}
+                    <div className="flex flex-col gap-3">
+                        <p className="text-xs font-medium text-black">Available size</p>
+                        {selectedColor && (
+                            <div className="flex gap-3">
+                                <select className="border border-gray-300 rounded-lg px-3 py-1"
+                                    value={selectedSize || ''}
+                                    onChange={e => setSelectedSize(e.target.value)}
+                                >
+                                    {colors[selectedColor].size.map(size => (
+                                        <option value={size} key={size}>{size}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+                    </div>
 
+                    {/* Comprar */}
+                    {isOutOfStock ? (
+                        <button 
+                            className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all duration-300 hover:bg-[#e2e2e2] w-full text-slate-300"
+                            disabled
+                        >
+                            Sold Out
+                        </button>
+                    ) : (
+                        <>
+                            {/* Contador */}
+                            <div className="space-y-3">
+                                <p className="text-sm font-medium text-black">Quantity:</p>
+                                <div className="flex gap-8 px-5 py-3 border border-slate-200 w-fit rounded-full">
+                                    <button onClick={decrement} disabled={count === 1}>
+                                        <IconMinus size={15} className="text-black" />
+                                    </button>
+                                    <span className="text-slate-500 text-sm">{count}</span>
+                                    <button onClick={increment}>
+                                        <IconPlus size={15} className="text-black" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Botones de acción */}
+                            <div className="flex flex-col gap-3">
+                                <button className="bg-[#f3f3f3] uppercase font-semibold tracking-widest text-xs py-4 rounded-full transition-all duration-300 hover:bg-[#e2e2e2] text-black"
+                                    onClick={addToCart}
+                                >
+                                    Add to cart
+                                </button>
+                                <button
+                                    className="bg-black hover:bg-slate-900 text-white uppercase font-semibold tracking-widest text-xs py-4 rounded-full"
+                                    onClick={buyNow}
+                                >
+                                    Buy Now
+                                </button>
+                            </div>
+                        </>
+                    )}
+
+                    <div className="flex pt-2">
+                        <div className="flex flex-col gap-1 flex-1 items-center">
+                            <IconTruckDelivery size={35} className="text-slate-950" />
+                            <p className="text-xs font-semibold text-black">Free Shipping</p>
+                        </div>
+
+                        <Link to='#' className="flex flex-col gap-1 flex-1 items-center justify-center">
+                            <IconMessage size={30} className="text-slate-950" />
+                            <p className="flex flex-col items-center text-xs text-black">
+                                <span className="font-semibold text-slate-950">Do you need help?</span>
+                                Contact us here
+                            </p>
+                        </Link>
                     </div>
                 </div>
-            
-      </div>
+            </div>
 
-      {/* Descripcion del producto */}
-
-      <ProductDescription content={product.description}/>
-
-
-  </>
-  );
+            {/* Descripción del producto */}
+            <ProductDescription content={product.description} />
+        </>
+    );
 };

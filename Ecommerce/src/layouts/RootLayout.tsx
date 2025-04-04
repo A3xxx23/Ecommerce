@@ -5,12 +5,14 @@ import { Footer } from '../components/shared/Footer';
 import { Hero } from '../components/Home/Hero';
 import { Sheet } from '../components/shared/sheet';
 import { useGlobalStore } from '../store/global.store';
+import { NavbarMobile } from '../components/shared/NavbarMobile';
 
 
 export const RootLayout = () => {
   const {pathname} = useLocation();
 
   const isSheetOpen = useGlobalStore(state => state.isSheetOpen);
+  const activeNavMobile = useGlobalStore(state => state.activeNavMobile);
 
   return (
     <div className='h-screen flex flex-col'>
@@ -23,6 +25,9 @@ export const RootLayout = () => {
       </main>
 
       {isSheetOpen && <Sheet/>}
+
+      {activeNavMobile && <NavbarMobile/>}
+
 
       <Footer/>
     </div>

@@ -2,7 +2,8 @@ import { IconCreditCardPay, IconReceiptRefund, IconTruckFilled, IconWorld } from
 
 export const Services = () => {
     return (
-        <div className="grid grid-col-2 gap-8 mt-6 mb-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-5 ">
+                       
+        <div className="grid grid-cols-2 gap-8 mt-6 mb-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-5 ">
             <div className="flex items-center gap-4 ">
              <IconTruckFilled size={40} className='text-gray-400'/>
 
