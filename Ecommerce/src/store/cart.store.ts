@@ -1,5 +1,5 @@
 import { StateCreator, create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools, persist } from "zustand/middleware";
 import { IcartItem } from "../components/shared/CartItem";
 
 // Tipado del estado del carrito
@@ -113,7 +113,12 @@ const storeApi: StateCreator<CartState> = (set) => ({
     },
 });
 
-// Exportar el store del carrito
+// Exportar el store del carrito y agregar persistencia
+
 export const useCartStore = create<CartState>()(
-    devtools(storeApi)
+    devtools(
+        persist(storeApi, {
+            name: "cart-storage", 
+        }),
+    )
 );

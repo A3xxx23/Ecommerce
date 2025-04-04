@@ -9,7 +9,6 @@ import { useEffect, useMemo, useState } from "react";
 import { variantProduct } from "../interfaces";
 import { Tag } from "../components/shared/Tag";
 import { Loader } from "../components/shared/Loader";
-import { useCounterStore } from "../store/counter.store";
 import { useCartStore } from "../store/cart.store";
 import toast from "react-hot-toast";
 
@@ -31,9 +30,11 @@ export const ShopAllslug = () => {
     const [selectedVariant, setSelectedVariant] = useState<variantProduct | null>(null);
 
 
-    const count = useCounterStore(state => state.count);
-    const increment = useCounterStore(state => state.increment);
-    const decrement = useCounterStore(state => state.decrement);
+    const [count, setCount] = useState(1);
+
+const increment = () => setCount(prev => prev + 1);
+const decrement = () => setCount(prev => Math.max(1, prev - 1));
+
     const addItem = useCartStore(state => state.addItem);
     const navigate = useNavigate();
 
@@ -130,6 +131,11 @@ export const ShopAllslug = () => {
         setSelectedColor(null);
         setSelectedSize(null);
         setSelectedVariant(null);
+        setCount(1);
+
+        
+
+        
     }, [slug]);
 
     if (isLoading) return <Loader />;

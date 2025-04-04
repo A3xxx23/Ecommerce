@@ -3,47 +3,52 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif,poppins;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif, Poppins;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #ffffff;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-keyframes: {
-  'fade-in':{
-    '0%':{opacity: '0'},
-    '100%':{opacity: '1'},
-  },
-
-  'slide-in':{
-    '0%':{transform: 'translateX(100%)'},
-    '100%':{transform: 'translateX(0)'},
-  },
-
-  'slide-in-left':{
-    '0%':{transform: 'translateX(-100%)'},
-    '100%':{transform: 'translateX(0)'}
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
-  animation: {
-    'fade-in': 'fade-in 0.5s ease-in-out',
-    'slide-in': 'slide-in 0.5s ease-in-out',
-    'slide-in-left': 'slide-in-left 0.5s ease-in-out'
-    'spin-slow': 'spin 1.5s linear infinite',
-    }
+@keyframes slide-in {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
 }
 
-.btn-paginated{
-  @apply border border-slate-700 rounded-md text-xs font-semibold py-1 px-3 hover:bg-slate-700 hover:text-white
-  transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:border-slate-800 disabled:text-slate-800
-  disabled:hover:bg-white disabled:hover:text-slate-700
+@keyframes slide-in-left {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+@layer utilities {
+  .animation-fade-in {
+    animation: fade-in 0.5s ease-in-out;
+  }
+
+  .animation-slide-in {
+    animation: slide-in 0.5s ease-in-out;
+  }
+
+  .animation-slide-in-left {
+    animation: slide-in-left 0.5s ease-in-out;
+  }
+
+  .animation-spin-slow {
+    animation: spin 1.5s linear infinite;
+  }
+}
+
+.btn-paginated {
+  @apply border border-slate-700 rounded-md text-xs font-semibold py-1 px-3 hover:bg-slate-700 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:border-slate-800 disabled:text-slate-800 disabled:hover:bg-white disabled:hover:text-slate-700;
 }
 

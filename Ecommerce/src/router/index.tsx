@@ -5,6 +5,8 @@ import {About} from '../pages/About'
 import { ContactUs } from "../pages/ContactUs";
 import { ShopAll } from '../pages/ShopAll'
 import { ShopAllslug } from "../pages/ShopAllslug";
+import { LoginPage } from "../pages/LoginPage";
+import { RegisterPage } from "../pages/RegisterPage";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +32,16 @@ export const router = createBrowserRouter([
             {
                 path: 'products/:slug',
                 element: <ShopAllslug/>,
+
+            },
+            {
+                path: 'login',
+                element: <LoginPage/>,
+
+            },
+            {
+                path: 'register',
+                element: <RegisterPage/>,
 
             },
             {

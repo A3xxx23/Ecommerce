@@ -4,6 +4,7 @@ import { ContainerFilter } from "../components/products/ContainerFilter";
 import { PreparedProducts } from "../helpers"
 import { useFilteredProducts} from "../hooks";
 import { Pagination } from "../components/shared/Pagination";
+import { Loader } from "../components/shared/Loader";
 
 export const ShopAll = () => {
 
@@ -34,9 +35,8 @@ export const ShopAll = () => {
 
             {
                 isLoading ? (
-                    <div className="flex justify-center items-center col-span-2 h-[500px]">
-                        <p className="text-2xl text-gray-500 text-center">Loading...</p>
-                    </div>
+                    <Loader/>
+                
                 ) : (
                     <div className="col-span-2 lg:col-span-2 xl:col-span-4 flex gap-12 flex-col">
                     <div className="grid gap-3 grid-cols-2 gap-y-10 xl:grid-cols-4">
