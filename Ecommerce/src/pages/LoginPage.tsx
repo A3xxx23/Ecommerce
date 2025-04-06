@@ -1,7 +1,7 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useLogin } from "../hooks/auth/useLogin";
+import { Link, Navigate } from "react-router-dom";
+import { useLogin, useUser } from "../hooks";
 import { Loader } from "../components/shared/Loader";
 
 export const LoginPage = () => {
@@ -12,6 +12,7 @@ export const LoginPage = () => {
   const [password, setPassword] = useState('123456');
 
   const { mutate, isPending } = useLogin();
+  const {session, isLoading} = useUser();
 
   //funcion para manejar el submit del formulario
 
@@ -20,6 +21,10 @@ export const LoginPage = () => {
 
     mutate ({email, password});
   }
+
+  if(isLoading) return <Loader/>;
+
+  if(session) return <Navigate to='/' />;
 
   return (
     <div className="h-full flex flex-col mt-12 gap-5 items-center">

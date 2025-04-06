@@ -53,3 +53,15 @@ export const PreparedProducts = (products: Product[]) =>{
 
     });
 }
+
+//funcion para formatear fecha a 5 de abril 2025
+
+export const formatDateLong = (date: string): string => {
+    const dateObject = new Date(date);
+
+    return dateObject.toLocaleDateString('en-US', {
+        year:'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+};

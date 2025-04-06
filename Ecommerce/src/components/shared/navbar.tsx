@@ -1,10 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { navbarLinks } from "../../constants/links";
-import { IconSearch, IconShoppingCart, IconUser,IconMenu2 } from '@tabler/icons-react';
+import { IconSearch, IconShoppingCart, IconUser,IconMenu2, IconUserCheck } from '@tabler/icons-react';
 import { Logo } from "./Logo";
 import { Link } from "react-router-dom";
 import { useGlobalStore } from "../../store/global.store";
 import { useCartStore } from "../../store/cart.store";
+import { useUser } from "../../hooks";
+import { Loader } from "./Loader";
 
 export const Navbar = () => {
 
@@ -18,6 +20,10 @@ export const Navbar = () => {
   const openSheet = useGlobalStore(state => state.openSheet);
 
   const totalItemsInCart = useCartStore(state => state.totalItemsInCart);
+
+  const {session, isLoading} = useUser();
+
+  const userId = session?.user.id;
   
 
 
@@ -49,11 +55,24 @@ export const Navbar = () => {
             <IconSearch stroke={1.5} width={25} height={25} className="text-black"/>
           </button>
 
-          <div className="relative">
-            <Link to="/account">
-              <IconUser stroke={1.5} width={25} height={25} className="text-black" />
-            </Link>
-          </div>
+          {
+            isLoading ? (
+              <Loader/>
+
+            ) : session ? (
+            <div className="relative">
+               <Link to="/account">
+                  <IconUserCheck stroke={1.5} size={25} className="text-black" />
+               </Link>
+            </div>
+
+            ) : (
+              <Link to="/login">
+                <IconUser stroke={1.5} size={25} className="text-black" />
+              </Link>
+
+            )
+          }
 
           <button className="relative" 
           onClick={() => openSheet('cart')}>

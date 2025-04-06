@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useGlobalStore } from "../../store/global.store";
-import { Cart } from "./cart";
+import { Cart } from "./Cart";
 import { Search } from "./Search";
 
 
@@ -58,7 +58,7 @@ export const Sheet = () => {
     <div className="fixed inset-0 bg-opacity-50 z-50 flex justify-end animate-fade-in-left delay-200">
         <div
         ref={sheetRef}
-        className="bg-white text-black h-screen w-[500px] shadow-lg animate-slide-in-left"
+        className="bg-white text-black h-screen w-[500px] md:w-[50%] shadow-lg animate-slide-in-left"
         >
             {renderContent()}
 

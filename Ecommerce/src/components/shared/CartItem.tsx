@@ -52,7 +52,7 @@ export const CartItem = ({item}: Props) => {
             <div className="flex justify-between">
                 <p className="font-semibold text-black">{item.name}</p>
                 <p className="text-sm font-medium text-gray-600 mt-1">
-                    {formatPrice(item.price)}
+                    {formatPrice(item.price * item.quantity)}
                 </p>
             </div>
 

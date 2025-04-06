@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { RootLayout } from "../layouts/RootLayout";
 import { HomePage } from '../pages/HomePage';
 import {About} from '../pages/About'
@@ -7,6 +7,11 @@ import { ShopAll } from '../pages/ShopAll'
 import { ShopAllslug } from "../pages/ShopAllslug";
 import { LoginPage } from "../pages/LoginPage";
 import { RegisterPage } from "../pages/RegisterPage";
+import { ClientLayout } from "../layouts/ClientLayout";
+import { OrdersUserPage } from "../pages/OrdersUserPage";
+import { CheckoutPage } from "../pages/CheckoutPage";
+import { ThankyouPage } from "../pages/ThankyouPage";
+import { OrderUserPage } from "../pages/OrderUserPage";
 
 export const router = createBrowserRouter([
     {
@@ -46,7 +51,23 @@ export const router = createBrowserRouter([
             },
             {
                 path: "account",
-                element: <div>Account</div>,
+                element: <ClientLayout/>,
+                children: [
+                    {
+                        path: '',
+                        element: <Navigate to={'/account/orders'}/>,
+
+                    },
+                    {
+                        path: 'orders',
+                        element: <OrdersUserPage/>,
+                    },
+                    {
+                        path: 'orders/:id',
+                        element: <OrderUserPage/>,
+
+                    },
+                ],
 
             },
             {
@@ -63,4 +84,15 @@ export const router = createBrowserRouter([
             },
         ],
     },
+
+    {
+        path: '/checkout',
+        element: <CheckoutPage/>,
+
+    },
+    {
+        path: '/checkout/:id/thank-you',
+        element: <ThankyouPage/>,
+    }
+    
 ]);

@@ -1,35 +1,12 @@
 //zod esquema de validacion para manejar formularios
 
-import { Link } from "react-router-dom";
-import { z } from "zod";
+import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRegister } from "../hooks/auth/useRegister";
-import { IconLoader } from "@tabler/icons-react";
+import { useRegister, useUser } from "../hooks";
+import { Loader } from "../components/shared/Loader";
+import { UserRegisterFormValues, userRegisterSchema } from "../lib/validators";
 
-
-
-export const userRegisterSchema = z.object({
-  email: z
-  .string()
-  .email('Invalid email address'),
-
-  password: z
-  .string()
-  .min(6, 'Password must be at least 6 characters long'),
-
-  fullname: z
-  .string()
-  .min(1, 'Full name is required'),
-
-  phone: z
-  .string()
-  .optional(),
-});
-
-export type UserRegisterFormValues = z.infer<
-    typeof userRegisterSchema
->;
 
 export const RegisterPage = () => {
 
@@ -51,14 +28,18 @@ export const RegisterPage = () => {
   });
 
   const { mutate, isPending } = useRegister();
+  const {session, isLoading} = useUser();
 
   const onRegister = handleSubmit(data => {
     const { email, password, fullname, phone } = data;
 
     mutate({email, password, fullname, phone});
   });
+    
 
-  console.log(errors);
+  if(isLoading) return <Loader/>;
+
+  if(session) return <Navigate to='/' />;
 
   return (
       <div className="h-full flex flex-col items-center mt-12 gap-5">
@@ -72,10 +53,7 @@ export const RegisterPage = () => {
 
         {
           isPending ? (
-            <div className="flex w-full h-full justify-center mt-20">
-              <IconLoader className="animate-spin-clockwise text-black" size={60}/>
-
-            </div>
+            <Loader/>
           ) : (
             <>
           <form className="flex flex-col items-center gap-4 w-full mt-10 sm:w-[400px] lg:w-[500px]" 
