@@ -16,7 +16,7 @@ const tableHeaders = [
 export const TableOrders = ({orders}: Props) => {
     const navigate = useNavigate();
 
-    return <div className="relative w-full h-full">
+    return <div className="relative w-full h-full ">
         <table className="text-sm w-full caption-bottom overflow-auto">
             <thead className="border border-gray-200 pb-3">
                 <tr className="text-sm font-bold text-stone-900">

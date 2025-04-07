@@ -53,7 +53,7 @@ export const ThankyouPage = () => {
 
         </header>
 
-        <main className="container flex-1 flex flex-col items-center gap-10">
+        <main className="w-full max-w-7xl mx-auto px-5 lg:px-12 flex-1 flex flex-col items-center gap-10">
             <div className="flex gap-3 items-center">
                 <IconCircleDashedCheck size={40} className="text-black" />
 

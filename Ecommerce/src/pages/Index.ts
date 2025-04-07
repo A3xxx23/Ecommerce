@@ -8,3 +8,7 @@ export * from './RegisterPage';
 export * from './LoginPage'
 export * from './ThankyouPage'
 export * from './OrderUserPage'
+
+//admin dashboard
+
+export * from './dashboard/DashboardProductsPage';

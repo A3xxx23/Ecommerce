@@ -1,4 +1,4 @@
-import { IconBrandLinkedin } from '@tabler/icons-react';
+import { IconBrandLinkedin, IconPackage, IconShoppingCart } from '@tabler/icons-react';
 import { IconBrandGithub } from '@tabler/icons-react';
 import { IconPhone } from '@tabler/icons-react';
 import { IconMail } from '@tabler/icons-react';
@@ -53,3 +53,17 @@ export const SocialLinks = [
     },
 ];
 
+export const dashboardLinks = [
+    { 
+        id: 1,
+        title: 'product',
+        href: '/dashboard/product',
+        icon: <IconPackage size={25} className='text-white'/>
+    },
+    { 
+        id: 2,
+        title: 'orders',
+        href: '/dashboard/orders',
+        icon: <IconShoppingCart size={25} className='text-white'/>
+    },
+]

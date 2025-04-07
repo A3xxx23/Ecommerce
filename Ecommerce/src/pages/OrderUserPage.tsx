@@ -22,7 +22,7 @@ export const OrderUserPage = () => {
     
     
     return <div>
-        <div className="flex flex-col justify-between items-center gap-5 md:flex-row md:gap-0">
+        <div className="w-full max-w-7xl mx-auto px-5 lg:px-12">
             <button
             className="border rounded-full border-slate-200 px-5 flex items-center justify-center gap-2 text-xs font-medium 
             uppercase tracking-widest hover:bg-stone-100 transition-all text-stone-950"

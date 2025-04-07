@@ -50,7 +50,7 @@ export const Navbar = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-5"> 
+        <div className="flex items-center gap-5 mr-24 md:mr-0 "> 
           <button onClick={() => openSheet('search')}>
             <IconSearch stroke={1.5} width={25} height={25} className="text-black"/>
           </button>

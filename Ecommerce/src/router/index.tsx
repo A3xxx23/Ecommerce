@@ -12,6 +12,8 @@ import { OrdersUserPage } from "../pages/OrdersUserPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
 import { ThankyouPage } from "../pages/ThankyouPage";
 import { OrderUserPage } from "../pages/OrderUserPage";
+import { DashboardLayout } from "../layouts/DashboardLayout";
+import { DashboardProductsPage } from "../pages/Index";
 
 export const router = createBrowserRouter([
     {
@@ -93,6 +95,20 @@ export const router = createBrowserRouter([
     {
         path: '/checkout/:id/thank-you',
         element: <ThankyouPage/>,
-    }
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout/>,
+        children: [
+            {
+                index: true,
+                element: <Navigate to='/dashboard/product' />,
+            },
+            {
+                path: 'product',
+                element: <DashboardProductsPage/>,
+            },
+        ],
+    },
     
 ]);

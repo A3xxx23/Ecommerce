@@ -3,7 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Navbar } from '../components/shared/navbar'; 
 import { Footer } from '../components/shared/Footer';
 import { Hero } from '../components/Home/Hero';
-import { Sheet } from '../components/shared/sheet';
+import { Sheet } from '../components/shared/Sheet';
 import { useGlobalStore } from '../store/global.store';
 import { NavbarMobile } from '../components/shared/NavbarMobile';
 
