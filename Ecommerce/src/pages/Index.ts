@@ -12,3 +12,4 @@ export * from './OrderUserPage'
 //admin dashboard
 
 export * from './dashboard/DashboardProductsPage';
+export * from './dashboard/DashboardNewProductPage'

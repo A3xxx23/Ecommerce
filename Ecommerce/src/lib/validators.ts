@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { JSONContent } from "@tiptap/react";
 
 export const userRegisterSchema = z.object({
   email: z
@@ -56,3 +57,64 @@ export type UserRegisterFormValues = z.infer<
 >;
 
 export type AddressFormValues = z.infer<typeof addressSchema>;
+
+const isContentEmpty = (value: JSONContent) : boolean => {
+  if(!value || !Array.isArray(value.content) || value.content.length == 0) {
+    return true;
+  }
+
+  return !value.content.some(
+    node => 
+      node.type === 'paragraph' && 
+      node.content && Array.isArray(node.content) && 
+      node.content.some(
+        textNode => 
+          textNode.type === 'text' && 
+          textNode.text && 
+          textNode.text.trim() !== ''
+        )
+  );
+};
+
+//esquema de productos
+
+export const productSchema = z.object({
+  name: z.string().min(1, 'name is required') .max(30, 'name must be less than 30 characters long'),
+  brand: z.string().min(1, 'brand is required') .max(30, 'brand must be less than 30 characters long'),
+  slug: 
+  z.string()
+  .min(1, 'slug is required') 
+  .regex(/^[a-z0-9]+(?:[-_][a-z0-9]+)*$/,'slug must be a valid slug'),
+  features: z.array(
+    z.object({
+    value: z
+    .string()
+    .min(1, 'Caracteristic value is required'),
+  })
+),
+  description: z.custom<JSONContent>(
+    value => !isContentEmpty(value), 
+    {message: 'Description is required'}
+  ),
+  variants: z.array(
+    z.object({
+      id:z.string().optional(),
+      stock: z.number() .min(1, 'Stock must be greater than 0'),
+      price: z.number() .min(1, 'Price must be greater than 0'),
+      size:z.string().min(1, 'Size is required'),
+      color: z
+					.string()
+					.regex(
+						/^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})|(rgb|hsl)a?\(\s*([0-9]{1,3}\s*,\s*){2}[0-9]{1,3}\s*(,\s*(0|1|0?\.\d+))?\s*\))$/,
+						'El color debe ser un valor válido en formato hexadecimal, RGB o HSL'
+					),
+				colorName: z
+					.string()
+					.min(1, 'color name is required'),
+			})
+		)
+		.min(1, 'Variant is required'),
+	images: z.array(z.any()).min(1, 'Images are required'),
+});
+
+export type ProductFormValues = z.infer<typeof productSchema>;

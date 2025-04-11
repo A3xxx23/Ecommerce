@@ -13,7 +13,7 @@ import { CheckoutPage } from "../pages/CheckoutPage";
 import { ThankyouPage } from "../pages/ThankyouPage";
 import { OrderUserPage } from "../pages/OrderUserPage";
 import { DashboardLayout } from "../layouts/DashboardLayout";
-import { DashboardProductsPage } from "../pages/Index";
+import { DashboardNewProductPage, DashboardProductsPage } from "../pages/Index";
 
 export const router = createBrowserRouter([
     {
@@ -107,6 +107,10 @@ export const router = createBrowserRouter([
             {
                 path: 'product',
                 element: <DashboardProductsPage/>,
+            },
+            {
+                path: 'product/new',
+                element: <DashboardNewProductPage/>,
             },
         ],
     },
