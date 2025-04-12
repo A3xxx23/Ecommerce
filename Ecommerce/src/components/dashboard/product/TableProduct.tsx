@@ -1,7 +1,7 @@
 import { IconDots, IconExternalLink } from "@tabler/icons-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useProducts } from "../../../hooks";
+import { useDeleteProduct, useProducts } from "../../../hooks";
 import { Loader } from "../../shared/Loader";
 import { formatDateLong, formatPrice } from "../../../helpers";
 import { Pagination } from "../../shared/Pagination";
@@ -41,6 +41,8 @@ export const TableProduct = () => {
 
     const { products, isLoading, totalProducts }: { products: Product[] | undefined; isLoading: boolean; totalProducts: number } = useProducts({ page });
 
+    const {mutate, isPending} = useDeleteProduct();
+
     const handleMenuToggle = (index: number) => {
         setOpenMenuIndex(openMenuIndex === index ? null : index);
     };
@@ -53,10 +55,11 @@ export const TableProduct = () => {
     };
 
     const handledDeleteProduct = (id: string) => {
-        console.log(id);
+        mutate(id)
+        setOpenMenuIndex(null);
     };
 
-    if (!products || isLoading || !totalProducts) return <Loader />;
+    if (!products || isLoading || !totalProducts || isPending) return <Loader />;
 
     return (
         <div className="flex flex-col flex-1 border border-gray-200 rounded-lg p-5 bg-white">
@@ -79,7 +82,7 @@ export const TableProduct = () => {
                     <tbody>
                         {products.map((product, index) => {
                             const selectedVariantIndex = selectedVariants[product.id] ?? 0;
-                            const selectedVariant = product.variants[selectedVariantIndex];
+                            const selectedVariant = product.variants[selectedVariantIndex] || {};
 
                             return (
                                 <tr key={index}>
@@ -109,8 +112,8 @@ export const TableProduct = () => {
                                         </select>
                                     </td>
 
-                                    <CellTableProduct content={formatPrice(selectedVariant.price)} />
-                                    <CellTableProduct content={selectedVariant.stock.toString()} />
+                                    <CellTableProduct content={formatPrice(selectedVariant?.price)} />
+                                    <CellTableProduct content={(selectedVariant.stock || 0).toString()} />
                                     <CellTableProduct content={formatDateLong(product.created_at)} />
 
                                     <td className="relative">

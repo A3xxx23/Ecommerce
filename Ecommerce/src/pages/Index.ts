@@ -5,11 +5,14 @@ export * from './ShopAll';
 export * from './ShopAllslug';
 export * from './OrdersUserPage';
 export * from './RegisterPage';
-export * from './LoginPage'
-export * from './ThankyouPage'
-export * from './OrderUserPage'
+export * from './LoginPage';
+export * from './ThankyouPage';
+export * from './OrderUserPage';
 
 //admin dashboard
 
 export * from './dashboard/DashboardProductsPage';
-export * from './dashboard/DashboardNewProductPage'
+export * from './dashboard/DashboardNewProductPage';
+export * from './dashboard/DashboardProductSlugPage';
+export * from './dashboard/DashboardOrdersPage';
+export * from './dashboard/DashboardOrderPage';

@@ -1,17 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import { getOrdersByCustomerId } from "../../actions";
-
+import { useQuery } from '@tanstack/react-query';
+import { getOrdersByCustomerId } from '../../actions';
 
 export const useOrders = () => {
+	const { data, isLoading } = useQuery({
+		queryKey: ['orders'],
+		queryFn: getOrdersByCustomerId,
+		retry: false,
+	});
 
-    const { data, isLoading, error } = useQuery({
-        queryKey: ['orders'],
-        queryFn: getOrdersByCustomerId
-    });
-
-    return {
-        data,
-        isLoading,
-        error,
-    }
+	return {
+		data,
+		isLoading,
+	};
 };

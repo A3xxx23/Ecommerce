@@ -51,7 +51,7 @@ export const LoginPage = () => {
             onChange={(e) => setEmail(e.target.value)}
             />
 
-<input 
+            <input 
             type="password" 
             placeholder="Enter your password"
             className="border border-slate-200 text-black px-5 py-4 placeholder:text-gray-600 text-sm rounded-full w-full"

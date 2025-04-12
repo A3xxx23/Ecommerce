@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { dashboardLinks } from "../../constants/links";
 import { IconLogout2 } from "@tabler/icons-react";
 import { signOut } from "../../actions";
@@ -9,6 +9,8 @@ export const Sidebar = () => {
   const handleLogout = async () => {
     await signOut();
   }
+
+  const navigate = useNavigate();
 
 
   return (
@@ -33,7 +35,10 @@ export const Sidebar = () => {
       </nav>
 
       <button className="bg-red-500 w-full py-[10px] rounded-md flex items-center justify-center gap-2 font-semibold text-sm
-      hover:underline" onClick={handleLogout}>
+      hover:underline" onClick={async () => {
+        await handleLogout();
+        navigate("/login");
+      }}>
         <span className="hidden lg:block">Log Out </span>
           <IconLogout2 size={20} className="inline-block text-white"/> 
       </button>

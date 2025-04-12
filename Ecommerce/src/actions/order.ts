@@ -249,3 +249,21 @@ export const createOrder = async (order: OrderInput) => {
     };
 
  }
+
+
+ //////////// ADMIN /////////////////
+
+ export const getAllOrders = async () => {
+    
+    const {data, error} = await supabase
+    .from('orders')
+    .select('id,total_amount, status, created_at, customers(full_name, email)')
+    .order('created_at', { ascending: false });
+
+    if(error){
+        console.log(error);
+        throw new Error('Error getting orders');
+    }
+
+    return data;
+ };

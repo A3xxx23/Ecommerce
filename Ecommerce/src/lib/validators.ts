@@ -99,7 +99,7 @@ export const productSchema = z.object({
   variants: z.array(
     z.object({
       id:z.string().optional(),
-      stock: z.number() .min(1, 'Stock must be greater than 0'),
+      stock: z.number() .min(0, 'Stock must be greater than or equal to 0'),
       price: z.number() .min(1, 'Price must be greater than 0'),
       size:z.string().min(1, 'Size is required'),
       color: z

@@ -1,3 +1,4 @@
+import { JSONContent } from "@tiptap/react";
 import { Json } from "../supabase/supabase";
 
 export interface variantProduct{
@@ -43,5 +44,26 @@ export interface PreparedProducts{
     }[],
 
     variants: variantProduct[];
+}
+
+// esta interface es la que se le enviara a la DB
+
+export interface ProductInput {
+	name: string;
+	brand: string;
+	slug: string;
+	features: string[];
+	description: JSONContent;
+	images: File[];
+	variants: VariantInput[];
+}
+
+export interface VariantInput{
+    id?: string;
+    stock: number;
+    price: number;
+    size: string;
+    color: string;
+    colorName: string;
 }
 
