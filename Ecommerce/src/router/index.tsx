@@ -13,7 +13,10 @@ import { CheckoutPage } from "../pages/CheckoutPage";
 import { ThankyouPage } from "../pages/ThankyouPage";
 import { OrderUserPage } from "../pages/OrderUserPage";
 import { DashboardLayout } from "../layouts/DashboardLayout";
-import { DashboardNewProductPage, DashboardOrderPage, DashboardOrdersPage, DashboardProductSlugPage, DashboardProductsPage } from "../pages/Index";
+import { DashboardNewProductPage, DashboardOrderPage, DashboardOrdersPage, DashboardProductSlugPage, DashboardProductsPage,    } from "../pages/Index";
+import Return from "../pages/Return";
+import Shipping from "../pages/Shipping";
+import Faq from "../pages/Faq";
 
 export const router = createBrowserRouter([
     {
@@ -74,15 +77,15 @@ export const router = createBrowserRouter([
             },
             {
                 path: "faq",
-                element: <div>FAQ</div>,
+                element: <Faq/>,
             },
             {
                 path: "shipping",
-                element: <div>Shipping</div>,
+                element: <Shipping/>,
             },
             {
                 path: "returns",
-                element: <div>Returns</div>,
+                element: <Return/>,
             },
         ],
     },

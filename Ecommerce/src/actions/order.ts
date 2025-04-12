@@ -254,34 +254,40 @@ export const createOrder = async (order: OrderInput) => {
  //////////// ADMIN /////////////////
 
  export const getAllOrders = async () => {
-    
-    const {data, error} = await supabase
-    .from('orders')
-    .select('id,total_amount, status, created_at, customers(full_name, email)')
-    .order('created_at', { ascending: false });
+	const { data, error } = await supabase
+		.from('orders')
+		.select(
+			'id, total_amount, status, created_at, customers(full_name, email)'
+		)
+		.order('created_at', { ascending: false });
 
-    if(error){
-        console.log(error);
-        throw new Error('Error getting orders');
-    }
+	if (error) {
+		console.log(error);
+		throw new Error(error.message);
+	}
 
-    return data;
- };
+	return data;
+};
 
  //Modificar estado de la orden
 
- export const updateOrderStatus = async ({id, status}: {id: number, status: string}) => {
+ export const updateOrderStatus = async ({
+	id,
+	status,
+}: {
+	id: number;
+	status: string;
+}) => {
+	const { error } = await supabase
+		.from('orders')
+		.update({ status })
+		.eq('id', id);
 
-    const {error} = await supabase
-    .from('orders')
-    .update({status})
-    .eq('id', id);
-
-    if(error){
-        console.log(error);
-        throw new Error('Error updating order status');
-    }
- }
+	if (error) {
+		console.log(error);
+		throw new Error(error.message);
+	}
+};
 
  //Funcion para obtener lo que es el id del params y con el mismo tomar el de la orden completa
 

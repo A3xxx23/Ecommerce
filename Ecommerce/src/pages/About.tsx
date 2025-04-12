@@ -63,10 +63,13 @@ export const About = () => {
     <div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full text-white p-5">
       <div className="col-span-1 xl:row-span-3">
         <div className="grid-container bg-black rounded-lg shadow-lg p-4">
-          <img src="/avatarNicole.png" alt="grid-1" className="w-full sm:h-[276px] h-fit object-contain rounded-md" />
+          <img src="/avatarNicole.png" alt="Avatar Nicole" className="w-full sm:h-[276px] h-fit object-contain rounded-md" />
           <div>
           <p className="grid-headtext text-gray-300 font-bold text-lg">Hi, I'm Nicole Tineo</p>
           <p className="grid-subtext text-gray-300 mt-5 text-md">
+          Stack: HMTL, CSS, Javascript, Python, Django, Java, SQL Server, Figma
+          </p>
+          <p className="grid-subtext text-gray-300 mt-5 mb-6 text-md">
           I'm a Systems Engineering student at UNPHU with a passion for graphic design and frontend development. 
           I enjoy creating visually appealing and user-friendly web experiences.
           </p>
@@ -76,9 +79,12 @@ export const About = () => {
 
       <div className="col-span-1 xl:row-span-3">
         <div className="grid-container bg-black  rounded-lg shadow-lg p-4">
-          <img src="/avatarAngel.png" alt="grid-2" className="w-full sm:h-[276px] h-fit object-contain rounded-md" />
+          <img src="/avatarAngel.png" alt="Avatar Angel" className="w-full sm:h-[276px] h-fit object-contain rounded-md" />
           <div>
           <p className="grid-headtext text-gray-300 font-bold text-lg">Hi, I'm Angel Aquino</p>
+          <p className="grid-subtext text-gray-300 mt-5 text-md ">
+            Stack: HTML, CSS, Javascript, Python, Django, Java, React, TailwindCSS, PHP, MySQL, SQL Server
+          </p>
           <p className="grid-subtext text-gray-300 mt-5 text-md ">
             I'm a Systems Engineering student at UNPHU with a strong passion for frontend development and UX/UI design.  
             I enjoy crafting intuitive and visually engaging user experiences.
@@ -97,7 +103,7 @@ export const About = () => {
       A&N Ecommerce was born with the vision of creating an online store that is not only functional, 
       but also visually appealing and easy to use.
       </p>
-      <p className="grid-subtext text-gray-100 text-lg font-semibold mt-4 leading-relaxed">
+      <p className="grid-subtext text-gray-100 text-lg font-semibold mt-4 mb-1 leading-relaxed">
       We focus on offering an intuitive, fluid, and modern user experience, combining design and technology 
       to make every interaction enjoyable and efficient.
       </p>
@@ -107,9 +113,9 @@ export const About = () => {
 
 
   <div className="xl:col-span-2 xl:row-span-3">
-  <div className="grid-container bg-black rounded-lg shadow-lg p-12 flex flex-col items-center">
-    <p className="grid-headtext text-gray-300 lg:text-3xl font-bold mb-2 sm:text-2xl pt-3 sm:text-center bg-gradient-to-r from-neutral-900 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight dark:via-slate-400 dark:to-neutral-400">🚀 Technology Behind A&N Ecommerce</p>
-    <p className="grid-subtext text-gray-100 lg:text-lg text-center mb-4 sm:text-md pt-7">
+  <div className="grid-container bg-black rounded-lg shadow-lg p-4 flex flex-col items-center">
+    <p className="grid-headtext text-gray-300 lg:text-3xl font-bold mb-2 sm:text-2xl pt-1 sm:text-center bg-gradient-to-r from-neutral-900 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight dark:via-slate-400 dark:to-neutral-400">🚀 Technology Behind A&N Ecommerce</p>
+    <p className="grid-subtext text-gray-100 lg:text-lg text-center mb-4 sm:text-md pt-1">
     A&N Ecommerce is built using a modern and scalable technology stack, ensuring a seamless shopping experience. 
     We leverage powerful tools and frameworks to create a fast, secure, and intuitive platform for our users.
     </p>
@@ -119,7 +125,6 @@ export const About = () => {
       <img src="./public/stack/supabase.svg" alt="Supabase" className="h-12 w-12" />
       <img src="./public/stack/tanstack.svg" alt="Tan Stack" className="h-12 w-12" />
       <img src="./public/stack/reactrouter.svg" alt="ReactRouter" className="h-12 w-12" />
-      <img src="./public/stack/stripe.svg" alt="Stripe" className="h-12 w-12"/>
       <img src="./public/stack/tailwindcss.svg" alt="tailwindCSS" className="h-12 w-12" />
       <img src="./public/stack/typescript.svg" alt="Typescript" className="h-12 w-12"/>
       <img src="./public/stack/zod.svg" alt="Zod" className="h-12 w-12"/>

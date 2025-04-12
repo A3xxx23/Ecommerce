@@ -8,6 +8,9 @@ export * from './RegisterPage';
 export * from './LoginPage';
 export * from './ThankyouPage';
 export * from './OrderUserPage';
+export * from './Faq';
+export * from './Return';
+export * from './Shipping';
 
 //admin dashboard
 

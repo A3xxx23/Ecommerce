@@ -13,6 +13,8 @@ export * from './products/useUpdateProducts'
 export * from './auth/useUser'
 export * from './auth/useLogin'
 export * from './auth/useRegister'
+export * from './auth/useCustomer'
+export * from './auth/useRoleUser'
 
 ////////orders
 
