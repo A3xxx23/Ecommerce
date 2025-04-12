@@ -267,3 +267,60 @@ export const createOrder = async (order: OrderInput) => {
 
     return data;
  };
+
+ //Modificar estado de la orden
+
+ export const updateOrderStatus = async ({id, status}: {id: number, status: string}) => {
+
+    const {error} = await supabase
+    .from('orders')
+    .update({status})
+    .eq('id', id);
+
+    if(error){
+        console.log(error);
+        throw new Error('Error updating order status');
+    }
+ }
+
+ //Funcion para obtener lo que es el id del params y con el mismo tomar el de la orden completa
+
+ export const getOrderByIdAdmin = async (id: number) => {
+    const {data: order , error: userError} = await supabase
+    .from('orders')
+    .select('*, addresses(*), customers(full_name, email), order_items(quantity, price, variants(color_name, size, products(name, images)))')
+    .eq('id', id)
+    .single();
+
+    if(userError){
+        console.log(userError);
+        throw new Error(userError.message)
+    }
+
+    return {
+        customer: {
+            email: order?.customers?.email,
+            full_name: order.customers?.full_name,
+        },
+        totalAmount:order.total_amount,
+        status: order.status,
+        created_at: order.created_at,
+        address: {
+            addressLine1: order.addresses?.address_line_1,
+            addressLine2: order.addresses?.address_line_2,
+            city: order.addresses?.city,
+            state: order.addresses?.state,
+            postalCode: order.addresses?.postal_code,
+            country: order.addresses?.country,
+        },
+        orderItems: order.order_items.map((item: { quantity: number; price: number; variants: { color_name: string; size: string; products: { name: string; images: string[] } } }) => ({
+            quantity: item.quantity,
+            price: item.price,
+            color_name: item.variants?.color_name, 
+            size: item.variants?.size,
+            productName: item.variants?.products?.name,
+            productImage: item.variants?.products?.images[0],
+        }))
+        
+    };
+ }

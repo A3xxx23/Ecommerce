@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import { formatDateLong, formatPrice } from "../../../helpers";
 import { OrderWithCustomer } from "../../../interfaces";
+import { useChangeStatusOrder } from "../../../hooks";
 
 const TableHeaders = [
     'Client',
@@ -20,6 +22,15 @@ interface Props {
 }
 
 export const TableOrdersAdmin = ({orders}: Props) => {
+
+  const navigate = useNavigate();
+
+  const { mutate } = useChangeStatusOrder();
+
+  const handleStatusChange = (id: number, status: string) => {
+    mutate({id, status});
+  }
+
   return (
     <div className="relative w-full h-full">
         <table className="text-sm w-full caption-bottom overflow-auto">
@@ -45,6 +56,9 @@ export const TableOrdersAdmin = ({orders}: Props) => {
                         <tr 
                         key={order.id}
                         className="cursor-pointer hover:bg-gray-200 transition-colors duration-200"
+                        onClick={() =>
+                            navigate(`/dashboard/orders/${order.id}`)
+                        }
                         >
                             <td className="p-4 font-medium tracking-tighter flex flex-col gap-1">
                                 <span className="font-semibold text-gray-600">
@@ -66,6 +80,7 @@ export const TableOrdersAdmin = ({orders}: Props) => {
                                 value={order.status}
                                 onClick={e => e.stopPropagation()}
                                 className="border border-gray-300 rounded"
+                                onChange={e => handleStatusChange(order.id, e.target.value)}
                                 >
                                     {statusOptions.map(option => (
                                         <option 

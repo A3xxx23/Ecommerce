@@ -19,3 +19,5 @@ export * from './auth/useRegister'
 export * from './orders/useCreateOrder';
 export * from './orders/useOrder';
 export * from './orders/useOrders';
+export * from './orders/useChangeStatusOrder';
+export * from './orders/useOrderAdmin';
