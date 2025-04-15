@@ -1,22 +1,17 @@
-import { TableOrdersAdmin } from "../../components/dashboard";
-import { Loader } from "../../components/shared/Loader";
-import { useAllOrders } from "../../hooks/orders/useAllOrders";
-
+import { TableOrdersAdmin } from '../../components/dashboard';
+import { Loader } from '../../components/shared/Loader';
+import { useAllOrders } from '../../hooks/orders/useAllOrders';
 
 export const DashboardOrdersPage = () => {
+	const { data, isLoading } = useAllOrders();
 
-  const { data , isLoading } = useAllOrders();
+	if (isLoading || !data) return <Loader />;
 
-  if ( isLoading || !data ) return <Loader/>; 
+	return (
+		<div className='space-y-5'>
+			<h1 className='text-2xl font-bold'>Orders</h1>
 
-
-  return (<div className="space-y-5">
-    <h1 className="text-2xl font-bold text-gray-900">
-        Orders
-    </h1>
-
-    <TableOrdersAdmin orders={data}/>
-    
-  </div>
-  );
+			<TableOrdersAdmin orders={data} />
+		</div>
+	);
 };

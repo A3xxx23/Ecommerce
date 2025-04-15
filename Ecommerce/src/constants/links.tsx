@@ -63,7 +63,7 @@ export const dashboardLinks = [
     { 
         id: 2,
         title: 'orders',
-        href: '/dashboard/orders',
+        href: '/dashboard/order',
         icon: <IconShoppingCart size={25} className='text-white'/>
     },
 ]

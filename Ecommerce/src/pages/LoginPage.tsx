@@ -8,7 +8,7 @@ export const LoginPage = () => {
 
   //state para el email y password
 
-  const [email, setEmail] = useState('psjasadtutdrcnimdx@hthlm.com');
+  const [email, setEmail] = useState('joshuamarchena26@gmail.com');
   const [password, setPassword] = useState('123456');
 
   const { mutate, isPending } = useLogin();

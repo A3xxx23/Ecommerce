@@ -120,11 +120,11 @@ export const router = createBrowserRouter([
                 element: <DashboardProductSlugPage/>,
             },
             {
-                path: 'orders',
+                path: 'order',
                 element: <DashboardOrdersPage/>,
             },
             {
-                path: 'orders/:id',
+                path: 'order/:id',
                 element: <DashboardOrderPage/>,
             }
         ],

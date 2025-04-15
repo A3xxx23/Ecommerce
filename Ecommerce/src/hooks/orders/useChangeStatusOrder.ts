@@ -10,9 +10,13 @@ export const useChangeStatusOrder= () => {
         mutationFn: updateOrderStatus,
         onSuccess: () => {
             queryclient.invalidateQueries({
-                queryKey:['orders', 'admin'],
-            })
-    },
+                 queryKey: ['orders', 'admin'],
+            });
+            toast.success('Order status updated', {
+                position: 'bottom-right',
+                duration: 2000,
+            });
+        },
     onError: (error) => {
         console.log(error);
         toast.error('Something went wrong',{
