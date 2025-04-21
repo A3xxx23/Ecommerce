@@ -83,7 +83,7 @@ export const About = () => {
           <div>
           <p className="grid-headtext text-gray-300 font-bold text-lg">Hi, I'm Angel Aquino</p>
           <p className="grid-subtext text-gray-300 mt-5 text-md ">
-            Stack: HTML, CSS, Javascript, Python, Django, Java, React, TailwindCSS, PHP, MySQL, SQL Server
+            Stack: HTML, CSS, Javascript, Python, Django, Java, React, TailwindCSS, PHP, MySQL, SQL Server, Jquery, Bootstrap, Figma
           </p>
           <p className="grid-subtext text-gray-300 mt-5 text-md ">
             I'm a Systems Engineering student at UNPHU with a strong passion for frontend development and UX/UI design.  
