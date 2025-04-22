@@ -11,9 +11,9 @@ export const DashboardOrderPage = () => {
 
 	const { id } = useParams<{ id: string }>();
 
-	const { data: order, isLoading } = useOrderAdmin(Number(id));
+	const { data: orders, isLoading } = useOrderAdmin(Number(id));
 
-	if (isLoading || !order) return <Loader />;
+	if (isLoading || !orders) return <Loader />;
 
 	return (
 		<div>
@@ -28,7 +28,7 @@ export const DashboardOrderPage = () => {
 
 				<div className='flex flex-col items-center gap-1.5'>
 					<h1 className='text-3xl font-bold'>Order #{id}</h1>
-					<p className='text-sm'>{formatDateLong(order.created_at)}</p>
+					<p className='text-sm'>{formatDateLong(orders.created_at)}</p>
 				</div>
 				<div />
 				<div />
@@ -47,7 +47,7 @@ export const DashboardOrderPage = () => {
 					</thead>
 
 					<tbody className='[&_tr:last-child]:border-0'>
-						{order.orderItems.map((item, index) => (
+						{orders.orderItems.map((item, index) => (
 							<tr key={index} className='border-b border-gray-200'>
 								<td className='p-4 font-medium tracking-tighter flex gap-3 items-center'>
 									<img
@@ -80,7 +80,7 @@ export const DashboardOrderPage = () => {
 				<div className='flex flex-col gap-3 text-slate-600 text-sm self-end w-1/2'>
 					<div className='flex justify-between'>
 						<p>Subtotal</p>
-						<p>{formatPrice(order.totalAmount)}</p>
+						<p>{formatPrice(orders.totalAmount)}</p>
 					</div>
 					<div className='flex justify-between'>
 						<p>Delivery (Standard)</p>
@@ -88,7 +88,7 @@ export const DashboardOrderPage = () => {
 					</div>
 					<div className='flex justify-between text-black font-semibold'>
 						<p>Total</p>
-						<p>{formatPrice(order.totalAmount)}</p>
+						<p>{formatPrice(orders.totalAmount)}</p>
 					</div>
 				</div>
 
@@ -98,20 +98,20 @@ export const DashboardOrderPage = () => {
 					<div className='border border-stone-300 p-5 flex flex-col gap-5'>
 						<div className='space-y-1'>
 							<h3 className='font-medium'>Client:</h3>
-							<p>{order.customer.full_name}</p>
+							<p>{orders.customer.full_name}</p>
 						</div>
 
 						<div className='flex flex-col gap-1 text-sm'>
 							<h3 className='font-medium text-base'>Delivery:</h3>
-							<p>{order.address.addressLine1}</p>
+							<p>{orders.address.addressLine1}</p>
 							<p>
-                            {order.address.addressLine2 &&
-									order.address.addressLine2}
+                            {orders.address.addressLine2 &&
+									orders.address.addressLine2}
 							</p>
-							<p>{order.address.city}</p>
-							<p>{order.address.state}</p>
-							<p>{order.address.postalCode}</p>
-							<p>{order.address.country}</p>
+							<p>{orders.address.city}</p>
+							<p>{orders.address.state}</p>
+							<p>{orders.address.postalCode}</p>
+							<p>{orders.address.country}</p>
 						</div>
 					</div>
 				</div>

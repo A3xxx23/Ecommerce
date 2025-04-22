@@ -1,9 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import { formatDateLong, formatPrice } from '../../../helpers';
 import { OrderWithCustomer } from '../../../interfaces';
 import { useChangeStatusOrder } from '../../../hooks';
 
-const tableHeaders = ['Cliente', 'Fecha', 'Estado', 'Total'];
+const tableHeaders = ['Client', 'Date', 'Status', 'Total'];
 
 const statusOptions = [
 	{ value: 'Pending', label: 'Pending' },
@@ -17,7 +16,6 @@ interface Props {
 }
 
 export const TableOrdersAdmin = ({ orders }: Props) => {
-	const navigate = useNavigate();
 
 	const { mutate } = useChangeStatusOrder();
 
@@ -43,9 +41,6 @@ export const TableOrdersAdmin = ({ orders }: Props) => {
 						<tr
 							key={order.id}
 							className='cursor-pointer hover:bg-gray-200 transition-colors duration-200'
-							onClick={() =>
-								navigate(`/dashboard/order/${order.id}`)
-							}
 						>
 							<td className='p-4 font-medium tracking-tighter flex flex-col gap-1 text-gray-600'>
 								<span className='font-semibold text-gray-600'>

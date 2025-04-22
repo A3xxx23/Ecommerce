@@ -124,7 +124,7 @@ export const router = createBrowserRouter([
                 element: <DashboardOrdersPage/>,
             },
             {
-                path: 'order/:id',
+                path: 'orders/:id',
                 element: <DashboardOrderPage/>,
             }
         ],

@@ -1,254 +1,235 @@
-import { OrderInput } from "../interfaces"
-import { supabase } from "../supabase/client";
+import { OrderInput } from '../interfaces';
+import { supabase } from '../supabase/client';
 
 export const createOrder = async (order: OrderInput) => {
-    
-    //1. obteniendo usuario autenticado + cliente de customer
+	// 1. Obtener el usuario autenticado + Cliente de tabla customer
+	const { data, error: errorUser } = await supabase.auth.getUser();
 
-    const {data , error: errorUser } = await supabase.auth.getUser();
+	if (errorUser) {
+		console.log(errorUser);
+		throw new Error(errorUser.message);
+	}
 
-    if(errorUser){
-        console.log(errorUser);
-        throw new Error('Error getting user');
-    }
+	const userId = data.user.id;
 
-    const userId = data.user.id;
+	const { data: customer, error: errorCustomer } = await supabase
+		.from('customers')
+		.select('id')
+		.eq('user_id', userId)
+		.single();
 
-    // 2. obtener cliente de supabase de customer
+	if (errorCustomer) {
+		console.log(errorCustomer);
+		throw new Error(errorCustomer.message);
+	}
 
-    const {data: customer, error: errorCustomer } = await supabase 
-    .from('customers')
-    .select('id')
-    .eq('user_id', userId )
-    .single(); //obtener un solo registro
+	const customerId = customer.id;
 
-    if (errorCustomer){
-        console.log(errorCustomer);
-        throw new Error('Error getting customer');
-    }
+	// 2. Verificar que haya stock suficiente para cada variante en el carrito
+	for (const item of order.cartItems) {
+		const { data: variantData, error: variantError } = await supabase
+			.from('variants')
+			.select('stock')
+			.eq('id', item.variantId)
+			.single();
 
-    const customerId = customer.id
+		if (variantError) {
+			console.log(variantError);
+			throw new Error(variantError.message);
+		}
 
-    //3. verificar si hay stock para cada variante agregada al carrito
+		if (variantData.stock < item.quantity) {
+			throw new Error(
+				'Not enough stock for variant'
+			);
+		}
+	}
 
-    for (const item of order.cartItems){
-        const {data: variantData, error: variantError } = await supabase
-        .from('variants')
-        .select('stock')
-        .eq('id', item.variantId)
-        .single();
+	// 3. Guardar la dirección del envío
+	const { data: addressData, error: addressError } = await supabase
+		.from('addresses')
+		.insert({
+			address_line1: order.address.addressLine1,
+			address_line2: order.address.addressLine2,
+			city: order.address.city,
+			state: order.address.state,
+			postal_code: order.address.postalCode,
+			country: order.address.country,
+			customer_id: customerId,
+		})
+		.select()
+		.single();
 
-        if (variantError) {
-            console.log(variantError);
-            throw new Error(variantError.message);
-        }
+	if (addressError) {
+		console.log(addressError);
+		throw new Error(addressError.message);
+	}
 
-        if (variantData.stock < item.quantity){
-            throw new Error('Not enough stock for this variant');
-        }
-    }
-    
+	// 4. Crear la orden
+	const { data: orderData, error: orderError } = await supabase
+		.from('orders')
+		.insert({
+			customer_id: customerId,
+			address_id: addressData.id,
+			total_amount: order.totalAmount,
+			status: 'Pending',
+		})
+		.select()
+		.single();
 
-    // 4. guardar direccion de envio por usuario
-    const {data: addressData, error: addressError } = await supabase
-    .from('addresses')
-    .insert({
-        address_line1: order.address.addressLine1,
-        address_line2: order.address.addressLine2,
-        city: order.address.city,
-        state: order.address.state,
-        postal_code: order.address.postalCode,
-        country: order.address.country,
-        customer_id: customerId,
-    })
-    .select()
-    .single(); 
+	if (orderError) {
+		console.log(orderError);
+		throw new Error(orderError.message);
+	}
 
-    if(addressError){
-        console.log(addressError);
-        throw new Error('Error getting address');
-    }
+	// 5. Guardar los detalles de la orden
+	const orderItems = order.cartItems.map(item => ({
+		order_id: orderData.id,
+		variant_id: item.variantId,
+		quantity: item.quantity,
+		price: item.price,
+	}));
 
-    //5. crear orden
+	const { error: orderItemsError } = await supabase
+		.from('order_items')
+		.insert(orderItems);
 
-    const {data:orderData, error: orderError} = await supabase
-    .from('orders')
-    .insert({
-        customer_id: customerId,
-        address_id: addressData.id,
-        total_amount: order.totalAmount,
-        status: 'pending',
-    })
-    .select()
-    .single();
+	if (orderItemsError) {
+		console.log(orderItemsError);
+		throw new Error(orderItemsError.message);
+	}
 
-    if(orderError){
-        console.log(orderError);
-        throw new Error(orderError.message);
-    }
+	// 6. Actualizar el stock de  las variantes
+	for (const item of order.cartItems) {
+		// Obtener el stock actual
+		const { data: variantData } = await supabase
+			.from('variants')
+			.select('stock')
+			.eq('id', item.variantId)
+			.single();
 
-    //Guardar detalles de la orden
+		if (!variantData) {
+			throw new Error('Not found variant');
+		}
 
-    const orderItems = order.cartItems.map(item =>({
-        order_id: orderData.id,
-        variant_id: item.variantId,
-        quantity: item.quantity,
-        price: item.price,
-    }))
+		const newStock = variantData.stock - item.quantity;
 
-    //6. ahora integrar en BD
+		const { error: updatedStockError } = await supabase
+			.from('variants')
+			.update({
+				stock: newStock,
+			})
+			.eq('id', item.variantId);
 
-    const {error: orderItemsError} = await supabase 
-    .from('order_items')
-    .insert(orderItems)
+		if (updatedStockError) {
+			console.log(updatedStockError);
+			throw new Error(
+				`Error updating stock for variant`
+			);
+		}
+	}
 
-    if(orderItemsError){
-        console.log(orderItemsError);
-        throw new Error(orderItemsError.message);
-    }
-
-    //actualizar stock de variantes
-
-    for (const item of order.cartItems) {
-
-        //7. obtener el stock actual de la variante
-
-        const {data: variantData} = await supabase
-        .from('variants')
-        .select('stock')
-        .eq('id', item.variantId)
-        .single();
-
-        if (!variantData){
-            throw new Error('Error getting variant');
-        }
-
-        //actualizar el stock
-
-        const newStock = variantData.stock - item.quantity;
-
-        //8. actualizar el stock en la BD
-
-        const {error: updateStockError} = await supabase
-        .from('variants')
-        .update({
-            stock:newStock,
-        })
-        .eq('id', item.variantId)
-
-        if(updateStockError){
-            console.log(updateStockError);
-            throw new Error('Error updating stock');
-        }
-    }
-
-    return orderData;
+	return orderData;
 };
 
-///9. obtener ordenes individuales
- export const getOrdersByCustomerId = async () => {
+export const getOrdersByCustomerId = async () => {
+	const { data, error } = await supabase.auth.getUser();
 
-    const {data, error} = await supabase.auth.getUser();
+	if (error) {
+		console.log(error);
+		throw new Error(error.message);
+	}
 
-    if(error) {
-        console.log(error);
-        throw new Error(error.message);
-    }
+	const { data: customer, error: customerError } = await supabase
+		.from('customers')
+		.select('id')
+		.eq('user_id', data.user.id)
+		.single();
 
-    const {data: customer, error: customerError } = await supabase
-    .from('customers')
-    .select('id')
-    .eq('user_id', data.user.id)
-    .single();
+	if (customerError) {
+		console.log(customerError);
+		throw new Error(customerError.message);
+	}
 
-    if(customerError){
-        console.log(customerError);
-        throw new Error(customerError.message);
-    }
+	const customerId = customer.id;
 
-    //extrar ordenes de la BD
+	const { data: orders, error: ordersError } = await supabase
+		.from('orders')
+		.select('id, total_amount, status, created_at')
+		.eq('customer_id', customerId)
+		.order('created_at', {
+			ascending: false,
+		});
 
-    const customerId = customer.id;
+	if (ordersError) {
+		console.log(ordersError);
+		throw new Error(ordersError.message);
+	}
 
-    const { data: orders, error: ordersError} = await supabase
-    .from('orders')
-    .select('id, total_amount, status, created_at')
-    .eq('customer_id', customerId)
-    .order('created_at', {
-        ascending: false,
-    });
+	return orders;
+};
 
-    if(ordersError){
-        console.log(ordersError);
-        throw new Error(ordersError.message);
-    }
+export const getOrderById = async (orderId: number) => {
+	const { data, error: errorUser } = await supabase.auth.getUser();
 
-    return orders;
- };
+	if (errorUser) {
+		console.log(errorUser);
+		throw new Error(errorUser.message);
+	}
 
- export const getOrderById = async (orderId: number) => {
-    const {data, error} = await supabase.auth.getUser();
+	const { data: customer, error: customerError } = await supabase
+		.from('customers')
+		.select('id')
+		.eq('user_id', data.user.id)
+		.single();
 
-    if(error) {
-        console.log(error);
-        throw new Error(error.message);
-    }
+	if (customerError) {
+		console.log(customerError);
+		throw new Error(customerError.message);
+	}
 
-    const {data: customer, error: customerError } = await supabase
-    .from('customers')
-    .select('id')
-    .eq('user_id', data.user.id)
-    .single();
+	const customerId = customer.id;
 
-    if(customerError){
-        console.log(customerError);
-        throw new Error(customerError.message);
-    }
+	const { data: order, error } = await supabase
+		.from('orders')
+		.select(
+			'*, addresses(*), customers(full_name, email), order_items(quantity, price, variants(color_name, size, products(name, images)))'
+		)
+		.eq('customer_id', customerId)
+		.eq('id', orderId)
+		.single();
 
-    const customerId = customer.id;
+	if (error) {
+		console.log(error);
+		throw new Error(error.message);
+	}
 
-    // 10. extrar ordenes de la BD
-
-    const {data: order , error: userError} = await supabase
-    .from('orders')
-    .select('*, addresses(*), customers(full_name, email), order_items(quantity, price, variants(color_name, size, products(name, images)))')
-    .eq('customer_id', customerId)
-    .eq('id', orderId)
-    .single();
-
-    if(userError){
-        console.log(userError);
-        throw new Error(userError.message)
-    }
-
-    return {
-        customer: {
-            email: order?.customers?.email,
-            full_name: order.customers?.full_name,
-        },
-        totalAmount:order.total_amount,
-        status: order.status,
-        created_at: order.created_at,
-        address: {
-            addressLine1: order.addresses?.address_line_1,
-            addressLine2: order.addresses?.address_line_2,
-            city: order.addresses?.city,
-            state: order.addresses?.state,
-            postalCode: order.addresses?.postal_code,
-            country: order.addresses?.country,
-        },
-        orderItems: order.order_items.map((item: { quantity: number; price: number; variants: { color_name: string; size: string; products: { name: string; images: string[] } } }) => ({
-            quantity: item.quantity,
-            price: item.price,
-            color_name: item.variants?.color_name, 
-            size: item.variants?.size,
-            productName: item.variants?.products?.name,
-            productImage: item.variants?.products?.images[0],
-        }))
-        
-    };
-
- }
+	return {
+		customer: {
+			email: order?.customers?.email,
+			full_name: order.customers?.full_name,
+		},
+		totalAmount: order.total_amount,
+		status: order.status,
+		created_at: order.created_at,
+		address: {
+			addressLine1: order.addresses?.address_line1,
+			addressLine2: order.addresses?.address_line2,
+			city: order.addresses?.city,
+			state: order.addresses?.state,
+			postalCode: order.addresses?.postal_code,
+			country: order.addresses?.country,
+		},
+		orderItems: order.order_items.map((item: { quantity: number; price: number; variants: { color_name: string; size: string; products: { name: string; images: string[] } } }) => ({
+			quantity: item.quantity,
+			price: item.price,
+			color_name: item.variants?.color_name,
+			size: item.variants?.size,
+			productName: item.variants?.products?.name,
+			productImage: item.variants?.products?.images[0],
+		})),
+	};
+};
 
 /* ********************************** */
 /*            ADMINISTRADOR           */
@@ -290,7 +271,9 @@ export const updateOrderStatus = async ({
 export const getOrderByIdAdmin = async (id: number) => {
 	const { data: order, error } = await supabase
 		.from('orders')
-		.select('*, addresses(*), customers(full_name, email), order_items(quantity, price, variants(color_name, size, products(name, images)))')
+		.select(
+			'*, addresses(*), customers(full_name, email), order_items(quantity, price, variants(color_name, size, products(name, images)))'
+		)
 		.eq('id', id)
 		.single();
 
@@ -322,11 +305,6 @@ export const getOrderByIdAdmin = async (id: number) => {
 			size: item.variants?.size,
 			productName: item.variants?.products?.name,
 			productImage: item.variants?.products?.images[0],
-        })),
-	};
-};
-
-
-
- 
-
+		})),
+    };
+}
