@@ -4,7 +4,7 @@ import { getOrderById } from '../../actions';
 export const useOrderAdmin= (id: number) => {
 
     const { data, isLoading } = useQuery({
-        queryKey: ['orders', 'admin', id],
+        queryKey: ['order', 'admin',id],
         queryFn: () => getOrderById(id),
         enabled: !!id,
         retry:false,

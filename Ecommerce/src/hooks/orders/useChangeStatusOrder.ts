@@ -17,7 +17,7 @@ export const useChangeStatusOrder= () => {
                 duration: 2000,
             });
         },
-    onError: (error) => {
+        onError: (error) => {
         console.log(error);
         toast.error('Something went wrong',{
             position: 'bottom-right',

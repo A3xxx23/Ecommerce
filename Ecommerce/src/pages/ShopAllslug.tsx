@@ -265,7 +265,9 @@ const decrement = () => setCount(prev => Math.max(1, prev - 1));
                             <IconMessage size={30} className="text-slate-950" />
                             <p className="flex flex-col items-center text-xs text-black">
                                 <span className="font-semibold text-slate-950">Do you need help?</span>
+                                <Link to={'/Contact US'} className="cursor-pointer text-slate-900 underline">
                                 Contact us here
+                                </Link>
                             </p>
                         </Link>
                     </div>

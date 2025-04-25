@@ -12,6 +12,8 @@ const availableBrands = [
     "Denim Tears",
     "Godspeed",
     "Hellstar",
+    "Anti Social Club",
+    "Maison Mihara Yasuhiro",
 ]
 
 interface Props{

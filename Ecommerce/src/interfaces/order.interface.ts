@@ -24,12 +24,9 @@ export interface OrderItemSingle{
 }
 
 export interface OrderWithCustomer {
-	id: number;
-	status: string;
-	total_amount: number;
-	created_at: string;
-	customers: {
-		full_name: string;
-		email: string;
-	} | null;
+    id: number;
+    created_at: string;
+    status: string;
+    total_amount: number;
+    customers: { full_name: string; email: string };
 }

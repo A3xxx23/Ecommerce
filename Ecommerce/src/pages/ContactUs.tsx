@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-hot-toast';
+import { motion } from 'framer-motion';
 
 export const ContactUs = () => {
   const form = useRef<HTMLFormElement | null>(null);
@@ -33,6 +34,7 @@ export const ContactUs = () => {
   };
 
   return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1 }}>
     <div className="flex justify-center items-center min-h-screen px-4">
       <form
         ref={form}
@@ -89,6 +91,7 @@ export const ContactUs = () => {
         </button>
       </form>
     </div>
+    </motion.div>
   );
 };
 

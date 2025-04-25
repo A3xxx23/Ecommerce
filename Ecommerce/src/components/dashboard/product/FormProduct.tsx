@@ -13,6 +13,7 @@ import { UploaderImages } from './UploaderImages';
 import { Editor } from './Editor';
 import { useCreateProduct, useProduct, useUpdateProduct } from '../../../hooks';
 import { Loader } from '../../shared/Loader';
+import { JSONContent } from '@tiptap/react';
 
 interface Props {
 	titleForm: string;
@@ -57,7 +58,7 @@ export const FormProduct = ({ titleForm }: Props) => {
                 colorName:v.color_name,
             })));
             setValue('images', product.images);
-            setValue('description', product.description);
+            setValue('description', product.description as JSONContent);
 
         }
     }, [product, setValue, isLoading])
@@ -185,7 +186,7 @@ export const FormProduct = ({ titleForm }: Props) => {
                     <Editor
                         setValue={setValue}
                         errors={errors}
-                        initialContent={product?.description}
+                        initialContent={product?.description as JSONContent}
                     />
                 </SectionFormProducts>
 

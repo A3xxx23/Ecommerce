@@ -1,7 +1,5 @@
-import { IconBrandLinkedin } from '@tabler/icons-react';
-import { IconBrandGithub } from '@tabler/icons-react';
-import { IconPhone } from '@tabler/icons-react';
-import { IconMail } from '@tabler/icons-react';
+import { motion } from 'framer-motion';
+import { IconBrandLinkedin, IconBrandGithub, IconPhone, IconMail } from '@tabler/icons-react';
 
 const SocialLinks = [
   {
@@ -59,10 +57,25 @@ const socialLinks = [
 
 export const About = () => {
   return (
-    <div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full text-white p-5">
-      <div className="col-span-1 xl:row-span-3 flex flex-col">
+    <motion.div
+      className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full text-white p-5"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Nicole's Card */}
+      <motion.div
+        className="col-span-1 xl:row-span-3 flex flex-col"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="grid-container bg-black rounded-lg shadow-lg p-4 flex-grow">
-          <img src="/avatarNicole.png" alt="Avatar Nicole" className="w-full sm:h-[276px] h-fit object-contain rounded-md mb-4" />
+          <img
+            src="/avatarNicole.png"
+            alt="Avatar Nicole"
+            className="w-full sm:h-[276px] h-fit object-contain rounded-md mb-4"
+          />
           <div className="flex-grow">
             <p className="grid-headtext text-gray-300 font-bold text-lg">Hi, I'm Nicole Tineo</p>
             <p className="grid-subtext text-gray-300 mt-2 text-md">
@@ -74,11 +87,21 @@ export const About = () => {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="col-span-1 xl:row-span-3 flex flex-col">
+      {/* Angel's Card */}
+      <motion.div
+        className="col-span-1 xl:row-span-3 flex flex-col"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7 }}
+      >
         <div className="grid-container bg-black rounded-lg shadow-lg p-4 flex-grow">
-          <img src="/avatarAngel.png" alt="Avatar Angel" className="w-full sm:h-[276px] h-fit object-contain rounded-md mb-4" />
+          <img
+            src="/avatarAngel.png"
+            alt="Avatar Angel"
+            className="w-full sm:h-[276px] h-fit object-contain rounded-md mb-4"
+          />
           <div className="flex-grow">
             <p className="grid-headtext text-gray-300 font-bold text-lg">Hi, I'm Angel Aquino</p>
             <p className="grid-subtext text-gray-300 mt-2 text-md">
@@ -90,9 +113,15 @@ export const About = () => {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="col-span-1 xl:row-span-3 flex flex-col">
+      {/* A&N Ecommerce Card */}
+      <motion.div
+        className="col-span-1 xl:row-span-3 flex flex-col"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="grid-container bg-black rounded-lg shadow-lg p-2 flex-grow">
           <div className="rounded-3xl w-full sm:h-[250px] h-fit flex justify-center items-center mb-4">
             <img src="/logoRemove.png" alt="Logo" className="max-w-[150px] max-h-[150px] object-contain" />
@@ -108,9 +137,15 @@ export const About = () => {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="xl:col-span-2 xl:row-span-3">
+      {/* Technology Section */}
+      <motion.div
+        className="xl:col-span-2 xl:row-span-3"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
         <div className="grid-container bg-black rounded-lg shadow-lg p-4 flex flex-col items-center">
           <p className="grid-headtext text-gray-300 lg:text-3xl font-bold mb-2 sm:text-2xl pt-1 sm:text-center bg-gradient-to-r from-neutral-900 via-slate-500 to-neutral-500 bg-[200%_auto] bg-clip-text leading-tight dark:via-slate-400 dark:to-neutral-400">
             🚀 Technology Behind A&N Ecommerce
@@ -120,33 +155,86 @@ export const About = () => {
             We leverage powerful tools and frameworks to create a fast, secure, and intuitive platform for our users.
           </p>
           <div className="flex flex-wrap justify-center gap-2 pt-7">
-            <img src="./public/stack/react_dark.svg" alt="React" className="h-12 w-12" />
-            <img src="./public/stack/supabase.svg" alt="Supabase" className="h-12 w-12" />
-            <img src="./public/stack/tanstack.svg" alt="Tan Stack" className="h-12 w-12" />
-            <img src="./public/stack/reactrouter.svg" alt="ReactRouter" className="h-12 w-12" />
-            <img src="./public/stack/tailwindcss.svg" alt="tailwindCSS" className="h-12 w-12" />
-            <img src="./public/stack/typescript.svg" alt="Typescript" className="h-12 w-12" />
-            <img src="./public/stack/zod.svg" alt="Zod" className="h-12 w-12" />
-            <img src="./public/stack/netlify.svg" alt="Netlify" className="h-12 w-12" />
+            <motion.img
+              src="./public/stack/react_dark.svg"
+              alt="React"
+              className="h-12 w-12"
+              whileHover={{ scale: 1.2 }}
+            />
+            <motion.img
+              src="./public/stack/supabase.svg"
+              alt="Supabase"
+              className="h-12 w-12"
+              whileHover={{ scale: 1.2 }}
+            />
+            <motion.img
+              src="./public/stack/tanstack.svg"
+              alt="Tan Stack"
+              className="h-12 w-12"
+              whileHover={{ scale: 1.2 }}
+            />
+            <motion.img
+              src="./public/stack/reactrouter.svg"
+              alt="ReactRouter"
+              className="h-12 w-12"
+              whileHover={{ scale: 1.2 }}
+            />
+            <motion.img
+              src="./public/stack/tailwindcss.svg"
+              alt="tailwindCSS"
+              className="h-12 w-12"
+              whileHover={{ scale: 1.2 }}
+            />
+            <motion.img
+              src="./public/stack/typescript.svg"
+              alt="Typescript"
+              className="h-12 w-12"
+              whileHover={{ scale: 1.2 }}
+            />
+            <motion.img
+              src="./public/stack/zod.svg"
+              alt="Zod"
+              className="h-12 w-12"
+              whileHover={{ scale: 1.2 }}
+            />
+            <motion.img
+              src="./public/stack/netlify.svg"
+              alt="Netlify"
+              className="h-12 w-12"
+              whileHover={{ scale: 1.2 }}
+            />
+            <motion.img
+              src="./public/stack/motion_dark.svg"
+              alt="Framer Motion"
+              className="h-12 w-12"
+              whileHover={{ scale: 1.2 }}
+            />
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="xl:col-span-1 xl:row-span-2">
+      {/* Social Media Section */}
+      <motion.div
+        className="xl:col-span-1 xl:row-span-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.2 }}
+      >
         <div className="grid-container bg-black rounded-lg shadow-lg p-2 flex flex-col items-center">
           <h2 className="py-2 text-center text-xl font-bold text-gray-300">Follow Nicole and Angel on social media</h2>
           <div className="flex flex-col items-center">
             <h2 className="text-center text-xl font-semibold text-white mb-4">Nicole Tineo</h2>
             <div className="flex justify-center gap-2">
               {socialLinks.map((link) => (
-                <a 
+                <motion.a
                   key={link.id}
-                  href={link.href} 
-                  target="_blank" 
+                  href={link.href}
+                  target="_blank"
                   rel="noreferrer"
+                  whileHover={{ scale: 1.2 }}
                 >
                   <link.icon className="w-8 h-8 text-white hover:text-gray-500" />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
@@ -157,19 +245,21 @@ export const About = () => {
             <h2 className="text-center text-xl font-semibold text-white mb-4">Angel Aquino</h2>
             <div className="flex justify-center gap-2">
               {SocialLinks.map((link) => (
-                <a 
+                <motion.a
                   key={link.id}
-                  href={link.href} 
-                  target="_blank" 
+                  href={link.href}
+                  target="_blank"
                   rel="noreferrer"
+                  whileHover={{ scale: 1.2 }}
                 >
                   <link.icon className="w-8 h-12 text-white hover:text-gray-500 pb-1" />
-                </a>
+                </motion.a>
               ))}
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
+

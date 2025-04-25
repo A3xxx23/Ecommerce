@@ -8,8 +8,8 @@ export const LoginPage = () => {
 
   //state para el email y password
 
-  const [email, setEmail] = useState('joshuamarchena26@gmail.com');
-  const [password, setPassword] = useState('123456');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const { mutate, isPending } = useLogin();
   const {session, isLoading} = useUser();

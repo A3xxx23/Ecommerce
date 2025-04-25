@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 const Shipping = () => {
-  const [openQuestion, setOpenQuestion] = useState(null);
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
 
-  const toggleAnswer = (id) => {
+  const toggleAnswer = (id: string | null) => {
     setOpenQuestion((prev) => (prev === id ? null : id));
   };
 

@@ -71,13 +71,13 @@ export const ThankyouPage = () => {
                 <div className="space-y-0.5 text-sm text-stone-950">
                     <p>Purchase with cash</p>
                     <p>Cash money</p>
-                    <p>RUC: 1245335543</p>
+                    <p>Promo code: 1245335543</p>
                     <p>method of payment: Cash</p>
                 </div>
 
-                <p className="text-sm text-stone-800">
-                Once the transfer is made, send proof to the email <strong>angelemilioaquino6@gmail.com</strong>
-
+                <p className="text-sm text-stone-800"> 
+                Once the transfer is made, send proof to the email <Link to={'/Contact Us'} className="font-bold"> 
+                <strong>angelemilioaquino6@gmail.com</strong></Link>
                 </p>
             </div>
 

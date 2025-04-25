@@ -134,7 +134,7 @@ export const FormCheckout = () => {
                 <div className="bg-stone-100 text-[13px] p-5 space-y-0.5 border border-gray-200 rounded-ee-md text-black">
                     <p>Purchase with cash</p>
                     <p>Cash money</p>
-                    <p>RUC: 1245335543</p>
+                    <p>Promo code: 1245335543</p>
                     <p>method of payment: Cash</p>
                     <p>{formatPrice(totalAmount)}</p>
 

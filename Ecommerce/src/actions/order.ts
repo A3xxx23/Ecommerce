@@ -170,65 +170,49 @@ export const getOrdersByCustomerId = async () => {
 };
 
 export const getOrderById = async (orderId: number) => {
-	const { data, error: errorUser } = await supabase.auth.getUser();
+    const { data: order, error } = await supabase
+        .from('orders')
+        .select(
+            '*, addresses(*), customers(full_name, email), order_items(quantity, price, variants(color_name, size, products(name, images)))'
+        )
+        .eq('id', orderId) // Solo filtrar por el ID del pedido
+        .single();
 
-	if (errorUser) {
-		console.log(errorUser);
-		throw new Error(errorUser.message);
-	}
+    if (error) {
+        console.log(error);
+        throw new Error(error.message);
+    }
 
-	const { data: customer, error: customerError } = await supabase
-		.from('customers')
-		.select('id')
-		.eq('user_id', data.user.id)
-		.single();
+    // Verificar que el pedido existe
+    if (!order) {
+        throw new Error('Order not found');
+    }
 
-	if (customerError) {
-		console.log(customerError);
-		throw new Error(customerError.message);
-	}
-
-	const customerId = customer.id;
-
-	const { data: order, error } = await supabase
-		.from('orders')
-		.select(
-			'*, addresses(*), customers(full_name, email), order_items(quantity, price, variants(color_name, size, products(name, images)))'
-		)
-		.eq('customer_id', customerId)
-		.eq('id', orderId)
-		.single();
-
-	if (error) {
-		console.log(error);
-		throw new Error(error.message);
-	}
-
-	return {
-		customer: {
-			email: order?.customers?.email,
-			full_name: order.customers?.full_name,
-		},
-		totalAmount: order.total_amount,
-		status: order.status,
-		created_at: order.created_at,
-		address: {
-			addressLine1: order.addresses?.address_line1,
-			addressLine2: order.addresses?.address_line2,
-			city: order.addresses?.city,
-			state: order.addresses?.state,
-			postalCode: order.addresses?.postal_code,
-			country: order.addresses?.country,
-		},
-		orderItems: order.order_items.map((item: { quantity: number; price: number; variants: { color_name: string; size: string; products: { name: string; images: string[] } } }) => ({
-			quantity: item.quantity,
-			price: item.price,
-			color_name: item.variants?.color_name,
-			size: item.variants?.size,
-			productName: item.variants?.products?.name,
-			productImage: item.variants?.products?.images[0],
-		})),
-	};
+    return {
+        customer: {
+            email: order?.customers?.email,
+            full_name: order.customers?.full_name,
+        },
+        totalAmount: order.total_amount,
+        status: order.status,
+        created_at: order.created_at,
+        address: {
+            addressLine1: order.addresses?.address_line1,
+            addressLine2: order.addresses?.address_line2,
+            city: order.addresses?.city,
+            state: order.addresses?.state,
+            postalCode: order.addresses?.postal_code,
+            country: order.addresses?.country,
+        },
+        orderItems: order.order_items.map((item: { quantity: number; price: number; variants: { color_name: string; size: string; products: { name: string; images: string[] } } }) => ({
+            quantity: item.quantity,
+            price: item.price,
+            color_name: item.variants?.color_name,
+            size: item.variants?.size,
+            productName: item.variants?.products?.name,
+            productImage: item.variants?.products?.images[0],
+        })),
+    };
 };
 
 /* ********************************** */
@@ -307,4 +291,43 @@ export const getOrderByIdAdmin = async (id: number) => {
 			productImage: item.variants?.products?.images[0],
 		})),
     };
-}
+};
+
+/* ********************************** */
+/*     BUG MAS DIFICIL DE SOLUCIONAR  */
+/* ********************************** */
+
+/*export const getOrderById = async (orderId: number) => {
+	const { data, error: errorUser } = await supabase.auth.getUser();
+
+	if (errorUser) {
+		console.log(errorUser);
+		throw new Error(errorUser.message);
+	}
+
+	const { data: customer, error: customerError } = await supabase
+		.from('customers')
+		.select('id')
+		.eq('user_id', data.user.id)
+		.single();
+
+	if (customerError) {
+		console.log(customerError);
+		throw new Error(customerError.message);
+	}
+
+	const customerId = customer.id;
+
+	const { data: order, error } = await supabase
+		.from('orders')
+		.select(
+			'*, addresses(*), customers(full_name, email), order_items(quantity, price, variants(color_name, size, products(name, images)))'
+		)
+		.eq('customer_id', customerId)
+		.eq('id', orderId)
+		.single();
+
+	if (error) {
+		console.log(error);
+		throw new Error(error.message);
+	}*/
