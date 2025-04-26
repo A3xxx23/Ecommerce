@@ -36,51 +36,51 @@
 
 1. HomePage de la pagina principal de la tienda
 
-![alt text](<Screen Shot 2025-04-24 at 6.39.14 PM.png>)
+![Home Page](</Ecommerce/public/screenshot/Home.png>)
 
 2. Carrito de compras
 
-![alt text](<Screen Shot 2025-04-24 at 6.41.21 PM.png>)
+![Carrito de compras](</Ecommerce/public/screenshot/Carrito.png>)
 
 3. About de la pagina de la tienda
 
-![alt text](<Screen Shot 2025-04-24 at 6.44.24 PM.png>)
+![About de la tienda](</Ecommerce/public/screenshot/AboutPage.png>)
 
 4. Contacto de la pagina de la tienda
 
 En esta parte tenemos lo que es el sección de contacto de la tienda donde se puede enviar un mensaje al correo electrónico de la tienda.
 
-![alt text](<Screen Shot 2025-04-24 at 7.02.31 PM.png>)
+![Contacto de la tienda](</Ecommerce/public/screenshot/ContactUs.png>)
 
 5. Sección de productos de la tienda y filtrado por marca y buscador de productos por nombre.
 
-![alt text](<Screen Shot 2025-04-24 at 7.03.45 PM.png>)
+![Pagina de productos](</Ecommerce/public/screenshot/ShopAll.png>)
 
-![alt text](<Screen Shot 2025-04-24 at 7.04.42 PM.png>)
+![contenedor de filtros](</Ecommerce/public/screenshot/FilterContainer.png>)
 
-![alt text](<Screen Shot 2025-04-24 at 7.05.22 PM.png>)
+![Buscador de productos por nombre](</Ecommerce/public/screenshot/BuscadorDeProductos.png>)
 
-6. Sección en la que el usuario puede ser sus compras y detalle de la compra.
+6. Sección en la que el usuario puede ver sus compras y detalle de la compra.
 
-![alt text](<Screen Shot 2025-04-24 at 7.06.42 PM.png>)
+![Tabla de ordenes](</Ecommerce/public/screenshot/UsuariosOrdenes.png>)
 
-![alt text](<Screen Shot 2025-04-24 at 7.07.24 PM.png>)
+![Ordenes detalladas](</Ecommerce/public/screenshot/PaginaDeOrdenDetallada.png>)
 
 7. Registro de usuario
 
-![alt text](<Screen Shot 2025-04-24 at 7.08.48 PM.png>)
+![Registro de la tienda](</Ecommerce/public/screenshot/PaginaDeRegistro.png>)
 
 8. Login de usuario
 
-![alt text](<Screen Shot 2025-04-24 at 7.08.30 PM.png>)
+![Login de la tienda](</Ecommerce/public/screenshot/InicioDeSesion.png>)
 
 9. Sección de productos de confirmación de pago de la tienda
 
-![alt text](<Screen Shot 2025-04-24 at 7.15.13 PM.png>)
+![Pagina de confirmación de pago](</Ecommerce/public/screenshot/SeccionDePago.png>)
 
 10. Sección del slug de cada producto individual de la tienda
 
-![alt text](<Screen Shot 2025-04-24 at 7.13.49 PM.png>)
+![Pagina de productos individual](</Ecommerce/public/screenshot/ProductoIndividual.png>)
 
 ---
 
