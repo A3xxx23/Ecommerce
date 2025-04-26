@@ -225,7 +225,7 @@ export const About = () => {
           <div className="flex flex-col items-center">
             <h2 className="text-center text-xl font-semibold text-white mb-4">Nicole Tineo</h2>
             <div className="flex justify-center gap-2">
-              {socialLinks.map((link) => (
+              {socialLinks.map((link) => ( 
                 <motion.a
                   key={link.id}
                   href={link.href}
