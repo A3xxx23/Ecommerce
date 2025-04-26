@@ -156,55 +156,55 @@ export const About = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-2 pt-7">
             <motion.img
-              src="./public/stack/react_dark.svg"
+              src="/stack/react_dark.svg"
               alt="React"
               className="h-12 w-12"
               whileHover={{ scale: 1.2 }}
             />
             <motion.img
-              src="./public/stack/supabase.svg"
+              src="/stack/supabase.svg"
               alt="Supabase"
               className="h-12 w-12"
               whileHover={{ scale: 1.2 }}
             />
             <motion.img
-              src="./public/stack/tanstack.svg"
+              src="/stack/tanstack.svg"
               alt="Tan Stack"
               className="h-12 w-12"
               whileHover={{ scale: 1.2 }}
             />
             <motion.img
-              src="./public/stack/reactrouter.svg"
+              src="/stack/reactrouter.svg"
               alt="ReactRouter"
               className="h-12 w-12"
               whileHover={{ scale: 1.2 }}
             />
             <motion.img
-              src="./public/stack/tailwindcss.svg"
+              src="/stack/tailwindcss.svg"
               alt="tailwindCSS"
               className="h-12 w-12"
               whileHover={{ scale: 1.2 }}
             />
             <motion.img
-              src="./public/stack/typescript.svg"
+              src="/stack/typescript.svg"
               alt="Typescript"
               className="h-12 w-12"
               whileHover={{ scale: 1.2 }}
             />
             <motion.img
-              src="./public/stack/zod.svg"
+              src="/stack/zod.svg"
               alt="Zod"
               className="h-12 w-12"
               whileHover={{ scale: 1.2 }}
             />
             <motion.img
-              src="./public/stack/netlify.svg"
+              src="/stack/netlify.svg"
               alt="Netlify"
               className="h-12 w-12"
               whileHover={{ scale: 1.2 }}
             />
             <motion.img
-              src="./public/stack/motion_dark.svg"
+              src="/stack/motion_dark.svg"
               alt="Framer Motion"
               className="h-12 w-12"
               whileHover={{ scale: 1.2 }}
