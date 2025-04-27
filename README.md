@@ -82,6 +82,22 @@ En esta parte tenemos lo que es el sección de contacto de la tienda donde se pu
 
 ![Pagina de productos individual](</Ecommerce/public/screenshot/ProductoIndividual.png>)
 
+11. Sección de admin de productos de la tienda
+
+![Admin productos](</Ecommerce/public/screenshot/AdminProduct.png>)
+
+12. Sección de admin de usuarios de la tienda
+
+![Pagina de clientes de la tienda](</Ecommerce/public/screenshot/ClientAdmin.png>)
+
+13. Sección de admin de agregar productos de la tienda
+
+![Pagina de agregar productos](</Ecommerce/public/screenshot/AddProduct.png>)
+
+14. Sección de admin de actualizar productos de la tienda
+
+![Pagina de actualizar productos](</Ecommerce/public/screenshot/UpdateProduct.png>)
+
 ---
 
 ## 🧑‍💻 Cómo usarlo 
