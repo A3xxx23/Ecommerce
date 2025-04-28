@@ -44,6 +44,21 @@ const brands = [
         alt: 'Yezzy',
         url: 'https://www.adidas.com/us'
     },
+    {
+        image: '/brands/Godspeed.png',
+        alt: 'Godspeed',
+        url: 'https://www.godspeednewyork.com'
+    },
+    {
+        image: '/brands/Hellstar_Logo.png',
+        alt: 'Hellstar',
+        url: 'https://www.hellstar.com'
+    },
+    {
+        image: '/brands/AntiSocial.png',
+        alt: 'Anti Social Club',
+        url: 'https://www.antisocialsocialclub.com'
+    },
 ]
 
 export const Brands = () => {

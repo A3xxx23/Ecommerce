@@ -223,7 +223,7 @@ export const About = () => {
         <div className="grid-container bg-black rounded-lg shadow-lg p-2 flex flex-col items-center">
           <h2 className="py-2 text-center text-xl font-bold text-gray-300">Follow Nicole and Angel on social media</h2>
           <div className="flex flex-col items-center">
-            <h2 className="text-center text-xl font-semibold text-white mb-4">Nicole Tineo</h2>
+            <h2 className="text-center text-xl font-semibold text-white mb-4 xl:mb-1">Nicole Tineo</h2>
             <div className="flex justify-center gap-2">
               {socialLinks.map((link) => ( 
                 <motion.a
@@ -242,7 +242,7 @@ export const About = () => {
           <div className="w-full border-t border-gray-500 my-4"></div>
 
           <div className="flex flex-col items-center">
-            <h2 className="text-center text-xl font-semibold text-white mb-4">Angel Aquino</h2>
+            <h2 className="text-center text-xl font-semibold text-white mb-4 xl:mb-0.5">Angel Aquino</h2>
             <div className="flex justify-center gap-2">
               {SocialLinks.map((link) => (
                 <motion.a
