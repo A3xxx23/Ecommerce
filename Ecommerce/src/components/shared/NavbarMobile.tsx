@@ -7,14 +7,6 @@ import { navbarLinks } from "../../constants/links";
 export const NavbarMobile = () => {
   const setActiveNavMobile = useGlobalStore(state => state.setActiveNavMobile);
   
-  
-  
-  
-  
-  
-  
-  
-  
     return (
         <div className="bg-white fixed py-32 text-black h-screen w-full shadow-lg animate-slide-in-left delay-1000 z-50 flex justify-center">
             <button
