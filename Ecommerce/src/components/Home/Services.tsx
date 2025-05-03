@@ -1,11 +1,11 @@
-import { IconCreditCardPay, IconReceiptRefund, IconTruckFilled, IconWorld } from '@tabler/icons-react';
+import { IconCreditCardPay, IconReceiptRefund, IconTruck, IconWorld } from '@tabler/icons-react';
 
 export const Services = () => {
     return (
                        
         <div className="grid grid-cols-2 gap-8 mt-6 mb-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-5 ">
             <div className="flex items-center gap-4 ">
-             <IconTruckFilled size={40} className='text-gray-400'/>
+             <IconTruck className='text-gray-400 w-10 h-10 min-w-[40px] min-h-[40px]'/>
 
              <div className='space-y-1'>
                 <p className='font-semibold text-black'>Free Shipping</p>
@@ -14,7 +14,7 @@ export const Services = () => {
             </div>
 
             <div className="flex items-center gap-4 ">
-             <IconReceiptRefund size={40} className='text-gray-400'/>
+             <IconReceiptRefund className='text-gray-400 w-10 h-10 min-w-[40px] min-h-[40px]'/>
 
              <div className='space-y-1 text-black'>
                 <p className='font-semibold'>Money Back Guarantee</p>
@@ -23,7 +23,7 @@ export const Services = () => {
             </div>
 
             <div className="flex items-center gap-4 ">
-             <IconCreditCardPay size={40} className='text-gray-400'/>
+             <IconCreditCardPay className='text-gray-400 w-10 h-10 min-w-[40px] min-h-[40px]'/>
 
              <div className='space-y-1 text-black'>
                 <p className='font-semibold'>Secure Payment</p>
@@ -32,7 +32,7 @@ export const Services = () => {
             </div>
 
             <div className="flex items-center gap-4">
-             <IconWorld size={40} className='text-gray-400'/>
+             <IconWorld className='text-gray-400 w-10 h-10 min-w-[40px] min-h-[40px]'/>
 
              <div className='space-y-1 text-black'>
                 <p className='font-semibold'>24/7 Support</p>
