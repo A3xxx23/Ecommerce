@@ -1,111 +1,111 @@
-# Ecommerce
+#Ecommerce
 
-# 🛍️ A&N E-commerce
+#🛍️ A&N E-commerce
 
-**A&N E-commerce** es una tienda online moderna enfocada en ofrecer productos esenciales de moda y estilo de vida, creado por Angel Aquino y Nicole Tineo. El sitio está diseñado para ofrecer una experiencia rápida, segura y visualmente atractiva para los usuarios.
+**A&N E-commerce** is a modern online store focused on offering essential fashion and lifestyle products, created by Angel Aquino and Nicole Tineo. The site is designed to offer a fast, secure, and visually appealing experience for users.
 
 ---
 
 ## 🚀 Tech Stack
 
-- ⚛️ **React** – Framework principal del frontend
-- 📘 **TypeScript** – Tipado estático para mayor robustez
-- 🌊 **Supabase** – Backend-as-a-Service para autenticación y base de datos
-- 🌐 **Netlify** – Hosting y funciones serverless
-- 🎨 **TailwindCSS** – Estilos modernos y responsivos
-- 🧠 **Tankstack Query** – Manejo de estado global
-- ✅ **Zod** – Validación de formularios y datos
-- **Framer Motion** – Animaciones y transiciones fluidas 
+- ⚛️ **React** – Core frontend framework
+- 📘 **TypeScript** – Static typing for robustness
+- 🌊 **Supabase** – Backend-as-a-Service for authentication and database
+- 🌐 **Netlify** – Serverless hosting and functions
+- 🎨 **TailwindCSS** – Modern, responsive styling
+- 🧠 **Tankstack Query** – Global state management
+- ✅ **Zod** – Form and data validation
+- **FramerMotion** – Smooth animations and transitions
 
 ---
 
-## ✨ Funcionalidades
+## ✨ Features
 
-- 🛒 Carrito de compras funcional
-- 📈 Panel de administración con la flexibilidad de Crear, eliminar, actualizar y ver productos y usuarios
-- 🧑‍💼 Gestión de productos y órdenes desde el panel admin
-- 🗺️ Interfaz de usuario intuitiva y fácil de usar
-- 📱 Responsive y optimizado para móviles
-- 🔐 Registro e inicio de sesión con autenticación segura vía Supabase
-- Opción de filtrado de productos por marcas y un buscador de productos por nombre.
-- Utilice la API de EmailJS para enviar correos electrónicos
+- 🛒 Functional shopping cart
+- 📈 Admin panel with the flexibility to create, delete, update, and view products and users
+- 🧑‍💼 Product and order management from the admin panel
+- 🗺️ Intuitive and easy-to-use user interface
+- 📱 Responsive and mobile-optimized
+- 🔐 Registration and login with secure authentication via Supabase
+- Option to filter products by brand and a product search by name.
+- Use the EmailJS API to send emails
 
 ---
 
-## 📸 Capturas de pantalla de toda la tienda
+## 📸 Screenshots of the entire store
 
-1. HomePage de la pagina principal de la tienda
+1. Store Home Page
 
 ![Home Page](</Ecommerce/public/screenshot/Home.png>)
 
-2. Carrito de compras
+2. Shopping Cart
 
-![Carrito de compras](</Ecommerce/public/screenshot/Carrito.png>)
+![Shopping Cart](</Ecommerce/public/screenshot/Carrito.png>)
 
-3. About de la pagina de la tienda
+3. Store About Page
 
-![About de la tienda](</Ecommerce/public/screenshot/AboutPage.png>)
+![About the Store](</Ecommerce/public/screenshot/AboutPage.png>)
 
-4. Contacto de la pagina de la tienda
+4. Store Contact Page
 
-En esta parte tenemos lo que es el sección de contacto de la tienda donde se puede enviar un mensaje al correo electrónico de la tienda.
+In this section, we have the store's contact section, where you can send a message to the store's email address.
 
-![Contacto de la tienda](</Ecommerce/public/screenshot/ContactUs.png>)
+![Store Contact](</Ecommerce/public/screenshot/ContactUs.png>)
 
-5. Sección de productos de la tienda y filtrado por marca y buscador de productos por nombre.
+5. Store Product Section, filtering by brand and searching for products by name.
 
-![Pagina de productos](</Ecommerce/public/screenshot/ShopAll.png>)
+![Product Page](</Ecommerce/public/screenshot/ShopAll.png>)
 
-![contenedor de filtros](</Ecommerce/public/screenshot/FilterContainer.png>)
+![Filter Container](</Ecommerce/public/screenshot/FilterContainer.png>)
 
-![Buscador de productos por nombre](</Ecommerce/public/screenshot/BuscadorDeProductos.png>)
+![Product Search by Name](</Ecommerce/public/screenshot/BuscadorDeProductos.png>)
 
-6. Sección en la que el usuario puede ver sus compras y detalle de la compra.
+6. Section where the user can view their purchases and purchase details.
 
-![Tabla de ordenes](</Ecommerce/public/screenshot/UsuariosOrdenes.png>)
+![Orders Table](</Ecommerce/public/screenshot/UsuariosOrdenes.png>)
 
-![Ordenes detalladas](</Ecommerce/public/screenshot/PaginaDeOrdenDetallada.png>)
+![Detailed Orders](</Ecommerce/public/screenshot/PaginaDeOrdenDetallada.png>)
 
-7. Registro de usuario
+7. User Registration
 
-![Registro de la tienda](</Ecommerce/public/screenshot/PaginaDeRegistro.png>)
+![Store Registration](</Ecommerce/public/screenshot/PaginaDeRegistro.png>)
 
-8. Login de usuario
+8. User Login
 
-![Login de la tienda](</Ecommerce/public/screenshot/InicioDeSesion.png>)
+![Store Login](</Ecommerce/public/screenshot/InicioDeSesion.png>)
 
-9. Sección de productos de confirmación de pago de la tienda
+9. Store Payment Confirmation Products Section
 
-![Pagina de confirmación de pago](</Ecommerce/public/screenshot/SeccionDePago.png>)
+![Payment Confirmation Page](</Ecommerce/public/screenshot/SeccionDePago.png>)
 
-10. Sección del slug de cada producto individual de la tienda
+10. Store Individual Product Slug Section
 
-![Pagina de productos individual](</Ecommerce/public/screenshot/ProductoIndividual.png>)
+![Individual Product Page](</Ecommerce/public/screenshot/ProductoIndividual.png>)
 
-11. Sección de admin de productos de la tienda
+11. Admin Section Store Products
 
-![Admin productos](</Ecommerce/public/screenshot/AdminProduct.png>)
+![Product Admin](</Ecommerce/public/screenshot/AdminProduct.png>)
 
-12. Sección de admin de usuarios de la tienda
+12. Store User Admin Section
 
-![Pagina de clientes de la tienda](</Ecommerce/public/screenshot/ClientAdmin.png>)
+![Store Client Page](</Ecommerce/public/screenshot/ClientAdmin.png>)
 
-13. Sección de admin de agregar productos de la tienda
+13. Store Add Product Admin Section
 
-![Pagina de agregar productos](</Ecommerce/public/screenshot/AddProduct.png>)
+![Add Product Page](</Ecommerce/public/screenshot/AddProduct.png>)
 
-14. Sección de admin de actualizar productos de la tienda
+14. Store Update Product Admin Section
 
-![Pagina de actualizar productos](</Ecommerce/public/screenshot/UpdateProduct.png>)
+![Update Product Page](</Ecommerce/public/screenshot/UpdateProduct.png>)
 
 ---
 
-## 🧑‍💻 Cómo usarlo 
+## 🧑‍💻 How to Use It
 
-1. Para usar el proyecto debe crear sus propias variables de entorno en  `/.env` con el siguiente formato: 
+1. To use the project, you must create your own environment variables in `/.env` with the following format:
 
 VITE_PROJECT_URL_SUPABASE = https://ytqtfazibwbtggqvxxxxxxxxx.supabase.co
 
-VITE_SUPABASE_API_KEY = eyJhbGciOiJIUzIxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+VITE_SUPABASE_API_KEY = eyJhbGciOiJIUzIxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-2. También debe crear una base de datos en supabase y configurar las tablas en la base de datos con los nombres y tipos de datos correctos.
+2. You must also create a database in supabase and configure the tables in the database with the correct names and data types.
