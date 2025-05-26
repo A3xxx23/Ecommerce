@@ -1,6 +1,5 @@
-#Ecommerce
 
-#🛍️ A&N E-commerce
+🛍️ A&N E-commerce
 
 **A&N E-commerce** is a modern online store focused on offering essential fashion and lifestyle products, created by Angel Aquino and Nicole Tineo. The site is designed to offer a fast, secure, and visually appealing experience for users.
 
